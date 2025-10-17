@@ -1,0 +1,730 @@
+Merged_Table_Optimized_Conso =
+VAR BaseTable =
+    ADDCOLUMNS (
+        FILTER (
+            DCJHA,
+            DCJHA[Cloud_Submission_Status] <> "Withdrawn"
+                || DCJHA[OpenSystems_Submission_Status] <> "Withdrawn"
+        ),
+        "Submission_Status",
+            VAR vCloudStatus = DCJHA[Cloud_Submission_Status]
+            VAR vOSStatus    = DCJHA[OpenSystems_Submission_Status]
+            RETURN
+                SWITCH (
+                    TRUE (),
+                    vCloudStatus = "Withdrawn" || vOSStatus = "Withdrawn", "Not Applicable",
+                    vCloudStatus <> "Withdrawn",
+                        SWITCH (
+                            vCloudStatus,
+                            "Declined",                    "No Onboarding Required",
+                            "No Onboarding Required",      "No Onboarding Required",
+                            "Active Design",               "Active Design",
+                            "Not Suitable for the Application", "Not Suitable for the Application",
+                            "To Be Engaged",               "Pending Engagement",
+                            "Engaged",                     "Engaged",
+                            "Submitted",                   "Submitted",
+                            "Onboard",                     "Onboarded",
+                            vCloudStatus
+                        ),
+                    /* Default to OS status if Cloud is Withdrawn */
+                    TRUE (),
+                        SWITCH (
+                            vOSStatus,
+                            "Declined",                    "No Onboarding Required",
+                            "No Onboarding Required",      "No Onboarding Required",
+                            "Active Design",               "Active Design",
+                            "Not Suitable for the Application", "Not Suitable for the Application",
+                            "To Be Engaged",               "Pending Engagement",
+                            "Engaged",                     "Engaged",
+                            "Submitted",                   "Submitted",
+                            "Onboard",                     "Onboarded",
+                            vOSStatus
+                        )
+                )
+    )
+VAR TableWithCloudColumns =
+    ADDCOLUMNS (
+        BaseTable,
+
+        /* ------------------- Flags ------------------- */
+        "Is_MVB",
+            IF (
+                NOT (
+                    ISBLANK (
+                        LOOKUPVALUE (
+                            MVB[Minimum Viable Bank (MVB)],
+                            MVB[Minimum Viable Bank (MVB)], DCJHA[Application Code]
+                        )
+                    )
+                ),
+                "True",
+                "False"
+            ),
+
+        "Is_ZDLRA",
+            VAR vZDLRA =
+                LOOKUPVALUE (
+                    'Applications In Scope'[included in ZDLRA],
+                    'Applications In Scope'[Application Code], DCJHA[Application Code]
+                )
+            RETURN
+                IF (
+                    ISBLANK ( vZDLRA ),
+                    "False",
+                    IF (
+                        ISLOGICAL ( vZDLRA ),
+                        IF ( vZDLRA, "ZDLRA", "False" ),
+                        IF ( UPPER ( TRIM ( vZDLRA ) ) IN { "Y", "ZDLRA", "1" }, "ZDLRA", "False" )
+                    )
+                ),
+
+        "Is_VMC2",
+            VAR vVMC2 =
+                LOOKUPVALUE (
+                    'Cloud_Rec_Submissions'[IsVMC2],
+                    'Cloud_Rec_Submissions'[MALCODE], DCJHA[Application Code]
+                )
+            RETURN
+                IF (
+                    ISBLANK ( vVMC2 ),
+                    "False",
+                    IF (
+                        ISLOGICAL ( vVMC2 ),
+                        IF ( vVMC2, "VMC2", "False" ),
+                        IF ( UPPER ( TRIM ( vVMC2 ) ) IN { "Y", "VMC2", "1" }, "VMC2", "False" )
+                    )
+                ),
+
+        /* ------------------- Mainframe (icon) ------------------- */
+        "Mainframe - MF Status",
+            VAR TextStatusMF_Value =
+                VAR vMF1_MF =
+                    MAXX (
+                        FILTER (
+                            'MainframeStatusSummary',
+                            'MainframeStatusSummary'[AppCode] = DCJHA[Application Code]
+                                && 'MainframeStatusSummary'[Mainframe Status Type] = "MF1 Status"
+                        ),
+                        'MainframeStatusSummary'[Status]
+                    )
+                RETURN
+                    SWITCH (
+                        TRUE (),
+                        DCJHA[Mainframe_Submission_Status] = "Withdrawn",               "Not Applicable",
+                        ISBLANK ( vMF1_MF ) && DCJHA[Mainframe_Submission_Status] = "Pending", "Awaiting TAO Action",
+                        ISBLANK ( vMF1_MF ),                                             "No Onboarding Required",
+                        vMF1_MF = "Declined",                                           "No Onboarding Required",
+                        vMF1_MF = "No Onboarding Required",                             "No Onboarding Required",
+                        vMF1_MF = "Active Design",                                      "Active Design",
+                        vMF1_MF = "Consult Requested",                                  "Active Design",
+                        vMF1_MF = "In Progress",                                        "Active Design",
+                        vMF1_MF = "Not Suitable for the Application",                   "Not Suitable for the Application",
+                        vMF1_MF = "To Be Engaged",                                      "Pending Engagement",
+                        vMF1_MF = "Engaged",                                            "Engaged",
+                        vMF1_MF = "Submitted",                                          "Submitted",
+                        vMF1_MF = "Onboard",                                            "Onboarded",
+                        TRUE (),                                                        vMF1_MF
+                    )
+            RETURN
+                SWITCH (
+                    TextStatusMF_Value,
+                    "Awaiting TAO Action",                 UNICHAR ( 10060 ),
+                    "Engaged",                             UNICHAR ( 8987 ),
+                    "Submitted",                           UNICHAR ( 128233 ),
+                    "Need Attention",                      UNICHAR ( 9888 ),
+                    "Needs_Attention",                     UNICHAR ( 9888 ),
+                    "Not Applicable",                      UNICHAR ( 128683 ),
+                    "Not Suitable for the Application",    UNICHAR ( 128683 ),
+                    "No Onboarding Required",              UNICHAR ( 128683 ),
+                    "Active Design",                       UNICHAR ( 128295 ),
+                    "Onboarded",                           UNICHAR ( 9989 ),
+                    "Pending Engagement",                  UNICHAR ( 9200 ),
+                    "In Progress",                         UNICHAR ( 8987 ),
+                    UNICHAR ( 128683 )
+                ),
+
+        /* ------------------- Cloud (text statuses) ------------------- */
+        "Cloud - Status",
+            VAR vCloud =
+                MAXX (
+                    FILTER (
+                        'CloudStatusSummary',
+                        'CloudStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'CloudStatusSummary'[Cloud Status Type] = "Cloud Status"
+                    ),
+                    'CloudStatusSummary'[Status]
+                )
+            RETURN
+                SWITCH (
+                    TRUE (),
+                    DCJHA[Cloud_Submission_Status] = "Withdrawn",                 "Not Applicable",
+                    ISBLANK ( vCloud ) && DCJHA[Cloud_Submission_Status] = "Pending", "Awaiting TAO Action",
+                    ISBLANK ( vCloud ),                                           "No Onboarding Required",
+                    vCloud = "Declined",                                          "No Onboarding Required",
+                    vCloud = "No Onboarding Required",                            "No Onboarding Required",
+                    vCloud = "Active Design",                                     "Active Design",
+                    vCloud = "Not Suitable for the Application",                  "Not Suitable for the Application",
+                    vCloud = "To Be Engaged",                                     "Pending Engagement",
+                    vCloud = "Engaged",                                           "Engaged",
+                    vCloud = "Submitted",                                         "Submitted",
+                    vCloud = "Onboard",                                           "Onboarded",
+                    TRUE (),                                                      vCloud
+                ),
+
+        "Cloud - NAS Status",
+            VAR vNAS =
+                MAXX (
+                    FILTER (
+                        'CloudStatusSummary',
+                        'CloudStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'CloudStatusSummary'[Cloud Status Type] = "NAS Status"
+                    ),
+                    'CloudStatusSummary'[Status]
+                )
+            RETURN
+                SWITCH (
+                    TRUE (),
+                    DCJHA[Cloud_Submission_Status] = "Withdrawn",                 "Not Applicable",
+                    ISBLANK ( vNAS ) && DCJHA[Cloud_Submission_Status] = "Pending", "Awaiting TAO Action",
+                    ISBLANK ( vNAS ),                                             "No Onboarding Required",
+                    vNAS = "Declined",                                            "No Onboarding Required",
+                    vNAS = "No Onboarding Required",                              "No Onboarding Required",
+                    vNAS = "Active Design",                                       "Active Design",
+                    vNAS = "Not Suitable for the Application",                    "Not Suitable for the Application",
+                    vNAS = "To Be Engaged",                                       "Pending Engagement",
+                    vNAS = "Engaged",                                             "Engaged",
+                    vNAS = "Submitted",                                           "Submitted",
+                    vNAS = "Onboard",                                             "Onboarded",
+                    TRUE (),                                                      vNAS
+                ),
+
+        "Cloud - SAN Status",
+            VAR vSAN =
+                MAXX (
+                    FILTER (
+                        'CloudStatusSummary',
+                        'CloudStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'CloudStatusSummary'[Cloud Status Type] = "SAN Status"
+                    ),
+                    'CloudStatusSummary'[Status]
+                )
+            RETURN
+                SWITCH (
+                    TRUE (),
+                    DCJHA[Cloud_Submission_Status] = "Withdrawn",                 "Not Applicable",
+                    ISBLANK ( vSAN ) && DCJHA[Cloud_Submission_Status] = "Pending", "Awaiting TAO Action",
+                    ISBLANK ( vSAN ),                                             "No Onboarding Required",
+                    vSAN = "Declined",                                            "No Onboarding Required",
+                    vSAN = "No Onboarding Required",                              "No Onboarding Required",
+                    vSAN = "Active Design",                                       "Active Design",
+                    vSAN = "Not Suitable for the Application",                    "Not Suitable for the Application",
+                    vSAN = "Not Required",                                        "Not Suitable for the Application",
+                    vSAN = "To Be Engaged",                                       "Pending Engagement",
+                    vSAN = "Engaged",                                             "Engaged",
+                    vSAN = "Submitted",                                           "Submitted",
+                    vSAN = "Onboard",                                             "Onboarded",
+                    TRUE (),                                                      vSAN
+                ),
+
+        "Cloud - Backup Status",
+            VAR vBackup =
+                MAXX (
+                    FILTER (
+                        'CloudStatusSummary',
+                        'CloudStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'CloudStatusSummary'[Cloud Status Type] = "Backup Status"
+                    ),
+                    'CloudStatusSummary'[Status]
+                )
+            RETURN
+                SWITCH (
+                    TRUE (),
+                    DCJHA[Cloud_Submission_Status] = "Withdrawn",                 "Not Applicable",
+                    ISBLANK ( vBackup ) && DCJHA[Cloud_Submission_Status] = "Pending", "Awaiting TAO Action",
+                    ISBLANK ( vBackup ),                                          "No Onboarding Required",
+                    vBackup = "Declined",                                         "No Onboarding Required",
+                    vBackup = "No Onboarding Required",                           "No Onboarding Required",
+                    vBackup = "Active Design",                                    "Active Design",
+                    vBackup = "Not Suitable for the Application",                 "Not Suitable for the Application",
+                    vBackup = "Not Required",                                     "Not Suitable for the Application",
+                    vBackup = "To Be Engaged",                                    "Pending Engagement",
+                    vBackup = "Engaged",                                          "Engaged",
+                    vBackup = "Submitted",                                        "Submitted",
+                    vBackup = "Onboard",                                          "Onboarded",
+                    TRUE (),                                                      vBackup
+                ),
+
+        /* ------------------- Open Systems (icons) ------------------- */
+        "Open Systems - NAS Status",
+            VAR TextStatusNAS_OS_Value =
+                VAR vNAS_OS =
+                    MAXX (
+                        FILTER (
+                            'OpenSystemsStatusSummary',
+                            'OpenSystemsStatusSummary'[AppCode] = DCJHA[Application Code]
+                                && 'OpenSystemsStatusSummary'[OS Status Type] = "NAS Status"
+                        ),
+                        'OpenSystemsStatusSummary'[Status]
+                    )
+                RETURN
+                    SWITCH (
+                        TRUE (),
+                        DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                  "Not Applicable",
+                        ISBLANK ( vNAS_OS ) && DCJHA[OpenSystems_Submission_Status] = "Pending", "Awaiting TAO Action",
+                        ISBLANK ( vNAS_OS ),                                                  "No Onboarding Required",
+                        vNAS_OS = "Declined",                                                 "No Onboarding Required",
+                        vNAS_OS = "No Onboarding Required",                                   "No Onboarding Required",
+                        vNAS_OS = "Active Design",                                            "Active Design",
+                        vNAS_OS = "Not Suitable for the Application",                         "Not Suitable for the Application",
+                        vNAS_OS = "To Be Engaged",                                            "Pending Engagement",
+                        vNAS_OS = "Engaged",                                                  "Engaged",
+                        vNAS_OS = "Submitted",                                                "Submitted",
+                        vNAS_OS = "Onboard",                                                  "Onboarded",
+                        TRUE (),                                                              vNAS_OS
+                    )
+            RETURN
+                SWITCH (
+                    TextStatusNAS_OS_Value,
+                    "Awaiting TAO Action",                 UNICHAR ( 10060 ),
+                    "Engaged",                             UNICHAR ( 8987 ),
+                    "Submitted",                           UNICHAR ( 128233 ),
+                    "Need Attention",                      UNICHAR ( 9888 ),
+                    "Not Applicable",                      UNICHAR ( 128683 ),
+                    "Not Suitable for the Application",    UNICHAR ( 128683 ),
+                    "No Onboarding Required",              UNICHAR ( 128683 ),
+                    "Active Design",                       UNICHAR ( 128295 ),
+                    "Onboarded",                           UNICHAR ( 9989 ),
+                    "Pending Engagement",                  UNICHAR ( 9200 ),
+                    "In Progress",                         UNICHAR ( 8987 ),
+                    UNICHAR ( 128683 )
+                ),
+
+        "Open Systems - SAN Status",
+            VAR TextStatusSAN_OS_Value =
+                VAR vSAN_OS =
+                    MAXX (
+                        FILTER (
+                            'OpenSystemsStatusSummary',
+                            'OpenSystemsStatusSummary'[AppCode] = DCJHA[Application Code]
+                                && 'OpenSystemsStatusSummary'[OS Status Type] = "SAN Status"
+                        ),
+                        'OpenSystemsStatusSummary'[Status]
+                    )
+                RETURN
+                    SWITCH (
+                        TRUE (),
+                        DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                  "Not Applicable",
+                        ISBLANK ( vSAN_OS ) && DCJHA[OpenSystems_Submission_Status] = "Pending", "Awaiting TAO Action",
+                        ISBLANK ( vSAN_OS ),                                                  "No Onboarding Required",
+                        vSAN_OS = "Declined",                                                 "No Onboarding Required",
+                        vSAN_OS = "No Onboarding Required",                                   "No Onboarding Required",
+                        vSAN_OS = "Active Design",                                            "Active Design",
+                        vSAN_OS = "Not Suitable for the Application",                         "Not Suitable for the Application",
+                        vSAN_OS = "Not Required",                                             "Not Suitable for the Application",
+                        vSAN_OS = "To Be Engaged",                                            "Pending Engagement",
+                        vSAN_OS = "Engaged",                                                  "Engaged",
+                        vSAN_OS = "Submitted",                                                "Submitted",
+                        vSAN_OS = "Onboard",                                                  "Onboarded",
+                        TRUE (),                                                              vSAN_OS
+                    )
+            RETURN
+                SWITCH (
+                    TextStatusSAN_OS_Value,
+                    "Awaiting TAO Action",                 UNICHAR ( 10060 ),
+                    "Engaged",                             UNICHAR ( 8987 ),
+                    "Submitted",                           UNICHAR ( 128233 ),
+                    "Need Attention",                      UNICHAR ( 9888 ),
+                    "Not Applicable",                      UNICHAR ( 128683 ),
+                    "Not Suitable for the Application",    UNICHAR ( 128683 ),
+                    "No Onboarding Required",              UNICHAR ( 128683 ),
+                    "Active Design",                       UNICHAR ( 128295 ),
+                    "Onboarded",                           UNICHAR ( 9989 ),
+                    "Pending Engagement",                  UNICHAR ( 9200 ),
+                    "In Progress",                         UNICHAR ( 8987 ),
+                    UNICHAR ( 128683 )
+                ),
+
+        "Open Systems - Backup Status",
+            VAR TextStatusBackup_OS_Value =
+                VAR vBackup_OS =
+                    MAXX (
+                        FILTER (
+                            'OpenSystemsStatusSummary',
+                            'OpenSystemsStatusSummary'[AppCode] = DCJHA[Application Code]
+                                && 'OpenSystemsStatusSummary'[OS Status Type] = "Backup Status"
+                        ),
+                        'OpenSystemsStatusSummary'[Status]
+                    )
+                RETURN
+                    SWITCH (
+                        TRUE (),
+                        DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                  "Not Applicable",
+                        ISBLANK ( vBackup_OS ) && DCJHA[OpenSystems_Submission_Status] = "Pending", "Awaiting TAO Action",
+                        ISBLANK ( vBackup_OS ),                                               "No Onboarding Required",
+                        vBackup_OS = "Declined",                                              "No Onboarding Required",
+                        vBackup_OS = "No Onboarding Required",                                "No Onboarding Required",
+                        vBackup_OS = "Active Design",                                         "Active Design",
+                        vBackup_OS = "Not Suitable for the Application",                      "Not Suitable for the Application",
+                        vBackup_OS = "Not Required",                                          "Not Suitable for the Application",
+                        vBackup_OS = "To Be Engaged",                                         "Pending Engagement",
+                        vBackup_OS = "Engaged",                                               "Engaged",
+                        vBackup_OS = "Submitted",                                             "Submitted",
+                        vBackup_OS = "Onboard",                                               "Onboarded",
+                        TRUE (),                                                              vBackup_OS
+                    )
+            RETURN
+                SWITCH (
+                    TextStatusBackup_OS_Value,
+                    "Awaiting TAO Action",                 UNICHAR ( 10060 ),
+                    "Engaged",                             UNICHAR ( 8987 ),
+                    "Submitted",                           UNICHAR ( 128233 ),
+                    "Need Attention",                      UNICHAR ( 9888 ),
+                    "Not Applicable",                      UNICHAR ( 128683 ),
+                    "Not Suitable for the Application",    UNICHAR ( 128683 ),
+                    "No Onboarding Required",              UNICHAR ( 128683 ),
+                    "Active Design",                       UNICHAR ( 128295 ),
+                    "Onboarded",                           UNICHAR ( 9989 ),
+                    "Pending Engagement",                  UNICHAR ( 9200 ),
+                    "In Progress",                         UNICHAR ( 8987 ),
+                    UNICHAR ( 128683 )
+                ),
+
+        /* ------------------- DB (icon) ------------------- */
+        "DB",
+            VAR TextStatusDB_Value =
+                VAR vStatus_DB =
+                    MAXX (
+                        FILTER (
+                            'OCACStatusSummary',
+                            'OCACStatusSummary'[AppCode] = DCJHA[Application Code]
+                                && 'OCACStatusSummary'[OCAC Status Type] = "OCAC Status"
+                        ),
+                        'OCACStatusSummary'[Status]
+                    )
+                RETURN
+                    SWITCH (
+                        TRUE (),
+                        DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                  "Not Applicable",
+                        ISBLANK ( vStatus_DB ) && DCJHA[OpenSystems_Submission_Status] = "Pending", "Awaiting TAO Action",
+                        ISBLANK ( vStatus_DB ),                                               "No Onboarding Required",
+                        vStatus_DB = "Declined",                                              "No Onboarding Required",
+                        vStatus_DB = "No Onboarding Required",                                "No Onboarding Required",
+                        vStatus_DB = "Active Design",                                         "Active Design",
+                        vStatus_DB = "Consult Requested",                                     "Active Design",
+                        vStatus_DB = "In Progress",                                           "Active Design",
+                        vStatus_DB = "Not Suitable for the Application",                      "Not Suitable for the Application",
+                        vStatus_DB = "To Be Engaged",                                         "Pending Engagement",
+                        vStatus_DB = "Engaged",                                               "Engaged",
+                        vStatus_DB = "Submitted",                                             "Submitted",
+                        vStatus_DB = "Onboard",                                               "Onboarded",
+                        TRUE (),                                                              vStatus_DB
+                    )
+            RETURN
+                SWITCH (
+                    TextStatusDB_Value,
+                    "Awaiting TAO Action",                 UNICHAR ( 10060 ),
+                    "Engaged",                             UNICHAR ( 8987 ),
+                    "Submitted",                           UNICHAR ( 128233 ),
+                    "Need Attention",                      UNICHAR ( 9888 ),
+                    "Needs_Attention",                     UNICHAR ( 9888 ),
+                    "Not Applicable",                      UNICHAR ( 128683 ),
+                    "Not Suitable for the Application",    UNICHAR ( 128683 ),
+                    "No Onboarding Required",              UNICHAR ( 128683 ),
+                    "Active Design",                       UNICHAR ( 128295 ),
+                    "Onboarded",                           UNICHAR ( 9989 ),
+                    "Pending Engagement",                  UNICHAR ( 9200 ),
+                    "In Progress",                         UNICHAR ( 8987 ),
+                    UNICHAR ( 128683 )
+                )
+    )
+RETURN
+    ADDCOLUMNS (
+        TableWithCloudColumns,
+
+        /* ------------------- Cloud_Status (first) ------------------- */
+        "Cloud_Status",
+            SWITCH (
+                TRUE (),
+                DCJHA[Cloud_Submission_Status] = "Withdrawn", "Not Applicable",
+                DCJHA[Cloud_Submission_Status] = "Pending",   "Awaiting TAO Action",
+
+                /* Consolidate statuses from the 4 cloud columns */
+                VAR CloudStatusList =
+                    {
+                        [Cloud - Status],
+                        [Cloud - NAS Status],
+                        [Cloud - SAN Status],
+                        [Cloud - Backup Status]
+                    }
+                VAR AnyNeedsAttention =
+                    COUNTROWS (
+                        FILTER ( CloudStatusList, [Value] IN { "Awaiting TAO Action", "Blocked", "Issue Identified" } )
+                    ) > 0
+                VAR AllNotApplicable =
+                    COUNTROWS (
+                        FILTER ( CloudStatusList, [Value] IN { "No Onboarding Required", "Not Applicable" } )
+                    ) = 4
+                VAR AllOnboarded =
+                    COUNTROWS (
+                        FILTER ( CloudStatusList, [Value] IN { "Onboarded", "Completed", "No Action Needed", "No Onboarding Required", "Not Suitable for the Application" } )
+                    ) = 4
+                VAR AllNotSuitable =
+                    COUNTROWS (
+                        FILTER ( CloudStatusList, [Value] IN { "Not Suitable for the Application", "Not Applicable", "No Action Needed", "No Onboarding Required" } )
+                    ) = 4
+                VAR AnyInProgress =
+                    COUNTROWS (
+                        FILTER ( CloudStatusList, [Value] IN { "Pending Engagement", "In Progress", "Engaged", "Active Design", "Submitted" } )
+                    ) > 0
+                RETURN
+                    SWITCH (
+                        TRUE (),
+                        AnyNeedsAttention,  "Needs Attention",
+                        AllNotSuitable,     "No Onboarding Required",
+                        AnyInProgress,      "Active Design",
+                        AllNotApplicable,   "Not Applicable",
+                        AllOnboarded,       "Onboarded",
+                                            "Unknown"
+                    )
+            ),
+
+        /* ------------------- New Consolidated Status (uses Cloud_Status) ------------------- */
+        "New Consolidated Status",
+            VAR TextStatusMF =
+                MAXX (
+                    FILTER (
+                        'MainframeStatusSummary',
+                        'MainframeStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'MainframeStatusSummary'[Mainframe Status Type] = "MF1 Status"
+                    ),
+                    'MainframeStatusSummary'[Status]
+                )
+            VAR MF_Status =
+                SWITCH (
+                    TRUE (),
+                    DCJHA[Mainframe_Submission_Status] = "Withdrawn",                              "Not Applicable",
+                    DCJHA[Mainframe_Submission_Status] = "Pending" && ISBLANK ( TextStatusMF ),   "Awaiting TAO Action",
+                    ISBLANK ( TextStatusMF ),                                                     "No Onboarding Required",
+                    TextStatusMF = "Declined",                                                    "No Onboarding Required",
+                    TextStatusMF = "No Onboarding Required",                                      "No Onboarding Required",
+                    TextStatusMF = "Active Design",                                               "Active Design",
+                    TextStatusMF = "Consult Requested",                                           "Active Design",
+                    TextStatusMF = "In Progress",                                                 "Active Design",
+                    TextStatusMF = "Not Suitable for the Application",                            "Not Suitable for the Application",
+                    TextStatusMF = "To Be Engaged",                                               "Pending Engagement",
+                    TextStatusMF = "Engaged",                                                     "Engaged",
+                    TextStatusMF = "Submitted",                                                   "Submitted",
+                    TextStatusMF = "Onboard",                                                     "Onboarded",
+                    TRUE (),                                                                      TextStatusMF
+                )
+
+            VAR TextStatusDB =
+                MAXX (
+                    FILTER (
+                        'OCACStatusSummary',
+                        'OCACStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'OCACStatusSummary'[OCAC Status Type] = "OCAC Status"
+                    ),
+                    'OCACStatusSummary'[Status]
+                )
+            VAR DB_Status =
+                SWITCH (
+                    TRUE (),
+                    DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                               "Not Applicable",
+                    DCJHA[OpenSystems_Submission_Status] = "Pending" && ISBLANK ( TextStatusDB ),     "Awaiting TAO Action",
+                    ISBLANK ( TextStatusDB ),                                                         "No Onboarding Required",
+                    TextStatusDB = "Declined",                                                        "No Onboarding Required",
+                    TextStatusDB = "No Onboarding Required",                                          "No Onboarding Required",
+                    TextStatusDB = "Active Design",                                                   "Active Design",
+                    TextStatusDB = "Consult Requested",                                               "Active Design",
+                    TextStatusDB = "In Progress",                                                     "Active Design",
+                    TextStatusDB = "Not Suitable for the Application",                                "Not Suitable for the Application",
+                    TextStatusDB = "To Be Engaged",                                                   "Pending Engagement",
+                    TextStatusDB = "Engaged",                                                         "Engaged",
+                    TextStatusDB = "Submitted",                                                       "Submitted",
+                    TextStatusDB = "Onboard",                                                         "Onboarded",
+                    TRUE (),                                                                          TextStatusDB
+                )
+
+            /* ****** Key change: use Cloud_Status defined above ****** */
+            VAR Cloud_Status_NCS = [Cloud_Status]
+
+            VAR vNASC =
+                MAXX (
+                    FILTER (
+                        'OpenSystemsStatusSummary',
+                        'OpenSystemsStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'OpenSystemsStatusSummary'[OS Status Type] = "NAS Status"
+                    ),
+                    'OpenSystemsStatusSummary'[Status]
+                )
+            VAR Consolidated_NAS_Status =
+                SWITCH (
+                    TRUE (),
+                    DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                               "Not Applicable",
+                    ISBLANK ( vNASC ) && DCJHA[OpenSystems_Submission_Status] = "Pending",            "Awaiting TAO Action",
+                    ISBLANK ( vNASC ),                                                                "No Onboarding Required",
+                    vNASC = "Declined",                                                               "No Onboarding Required",
+                    vNASC = "No Onboarding Required",                                                 "No Onboarding Required",
+                    vNASC = "Active Design",                                                          "Active Design",
+                    vNASC = "Not Suitable for the Application",                                       "Not Suitable for the Application",
+                    vNASC = "To Be Engaged",                                                          "Pending Engagement",
+                    vNASC = "Engaged",                                                                "Engaged",
+                    vNASC = "Submitted",                                                              "Submitted",
+                    vNASC = "Onboard",                                                                "Onboarded",
+                    TRUE (),                                                                          vNASC
+                )
+
+            VAR vSANC =
+                MAXX (
+                    FILTER (
+                        'OpenSystemsStatusSummary',
+                        'OpenSystemsStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'OpenSystemsStatusSummary'[OS Status Type] = "SAN Status"
+                    ),
+                    'OpenSystemsStatusSummary'[Status]
+                )
+            VAR Consolidated_SAN_Status =
+                SWITCH (
+                    TRUE (),
+                    DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                               "Not Applicable",
+                    ISBLANK ( vSANC ) && DCJHA[OpenSystems_Submission_Status] = "Pending",            "Awaiting TAO Action",
+                    ISBLANK ( vSANC ),                                                                "No Onboarding Required",
+                    vSANC = "Declined",                                                               "No Onboarding Required",
+                    vSANC = "No Onboarding Required",                                                 "No Onboarding Required",
+                    vSANC = "Active Design",                                                          "Active Design",
+                    vSANC = "Not Suitable for the Application",                                       "Not Suitable for the Application",
+                    vSANC = "Not Required",                                                           "Not Suitable for the Application",
+                    vSANC = "To Be Engaged",                                                          "Pending Engagement",
+                    vSANC = "Engaged",                                                                "Engaged",
+                    vSANC = "Submitted",                                                              "Submitted",
+                    vSANC = "Onboard",                                                                "Onboarded",
+                    TRUE (),                                                                          vSANC
+                )
+
+            VAR vBackupC =
+                MAXX (
+                    FILTER (
+                        'OpenSystemsStatusSummary',
+                        'OpenSystemsStatusSummary'[AppCode] = DCJHA[Application Code]
+                            && 'OpenSystemsStatusSummary'[OS Status Type] = "Backup Status"
+                    ),
+                    'OpenSystemsStatusSummary'[Status]
+                )
+            VAR Consolidated_Backup_Status =
+                SWITCH (
+                    TRUE (),
+                    DCJHA[OpenSystems_Submission_Status] = "Withdrawn",                               "Not Applicable",
+                    ISBLANK ( vBackupC ) && DCJHA[OpenSystems_Submission_Status] = "Pending",         "Awaiting TAO Action",
+                    ISBLANK ( vBackupC ),                                                             "No Onboarding Required",
+                    vBackupC = "Declined",                                                            "No Onboarding Required",
+                    vBackupC = "Active Design",                                                       "Active Design",
+                    vBackupC = "No Onboarding Required",                                              "No Onboarding Required",
+                    vBackupC = "Not Suitable for the Application",                                    "Not Suitable for the Application",
+                    vBackupC = "Not Required",                                                        "Not Suitable for the Application",
+                    vBackupC = "To Be Engaged",                                                       "Pending Engagement",
+                    vBackupC = "Engaged",                                                             "Engaged",
+                    vBackupC = "Submitted",                                                           "Submitted",
+                    vBackupC = "Onboard",                                                             "Onboarded",
+                    TRUE (),                                                                          vBackupC
+                )
+
+            VAR Status_List =
+                { MF_Status, Cloud_Status_NCS, Consolidated_NAS_Status, Consolidated_SAN_Status, Consolidated_Backup_Status, DB_Status }
+
+            VAR Any_In_Progress =
+                COUNTROWS (
+                    FILTER ( Status_List, [Value] IN { "Pending Engagement", "In Progress", "Engaged", "Needs_Attention", "Active Design", "Submitted" } )
+                ) > 0
+
+            VAR Any_Needs_Attention =
+                COUNTROWS (
+                    FILTER ( Status_List, [Value] IN { "Awaiting TAO Action", "Blocked", "Issue Identified" } )
+                ) > 0
+
+            VAR All_No_Action_Needed =
+                COUNTROWS (
+                    FILTER ( Status_List, [Value] IN { "Not Applicable", "No Onboarding Required" } )
+                ) = 6
+
+            VAR All_NoDataCategory =
+                COUNTROWS (
+                    FILTER ( Status_List, [Value] IN { "Awaiting TAO Action", "Decomm", "Not Applicable" } )
+                ) = 6
+
+            VAR All_Onboarded =
+                COUNTROWS (
+                    FILTER ( Status_List, [Value] IN { "Onboarded", "Completed", "No Action Needed", "No Onboarding Required", "Not Suitable for the Application" } )
+                ) = 6
+
+            VAR All_NotSuitable =
+                COUNTROWS (
+                    FILTER ( Status_List, [Value] IN { "Not Suitable for the Application", "Not Applicable", "No Action Needed", "No Onboarding Required" } )
+                ) = 6
+
+            RETURN
+                SWITCH (
+                    TRUE (),
+                    Any_Needs_Attention,  "Needs Attention",
+                    All_NotSuitable,      "Vendor-Supported Option",
+                    Any_In_Progress,      "In Progress",
+                    All_No_Action_Needed, "No Onboarding Required",
+                    All_Onboarded,        "Onboarded",
+                    All_NoDataCategory,   "Needs to be Reassessed",
+                                          "Unknown"
+                ),
+
+        /* ------------------- Cloud_Consolidated_Bar (unchanged) ------------------- */
+        "Cloud_Consolidated_Bar",
+            SWITCH (
+                [Cloud - Backup Status],
+                "Awaiting TAO Action", UNICHAR ( 10060 ),
+                "Active Design",       UNICHAR ( 128295 ),
+                "In Progress1",        "▒",
+                "Pending Engagement",  UNICHAR ( 9200 ),
+                "In Progress",         "♣",
+                "Engaged",             UNICHAR ( 8987 ),
+                "Submitted",           UNICHAR ( 128233 ),
+                "Onboarded",           "╍╍" & UNICHAR ( 9989 ),
+                                       UNICHAR ( 128683 )
+            )
+            &
+            SWITCH (
+                [Cloud - NAS Status],
+                "Awaiting TAO Action", "╍╍" & UNICHAR ( 10060 ),
+                "Active Design",       "╍╍" & UNICHAR ( 128295 ),
+                "In Progress1",        "╍╍▒",
+                "Pending Engagement",  "╍╍" & UNICHAR ( 9200 ),
+                "In Progress",         "╍╍♣",
+                "Engaged",             "╍╍" & UNICHAR ( 8987 ),
+                "Submitted",           "╍╍" & UNICHAR ( 128233 ),
+                "Onboarded",           "╍╍" & UNICHAR ( 9989 ),
+                                       "╍╍" & UNICHAR ( 128683 )
+            )
+            &
+            SWITCH (
+                [Cloud - SAN Status],
+                "Awaiting TAO Action", "╍╍" & UNICHAR ( 10060 ),
+                "Active Design",       "╍╍" & UNICHAR ( 128295 ),
+                "In Progress1",        "╍╍▒",
+                "Pending Engagement",  "╍╍" & UNICHAR ( 9200 ),
+                "In Progress",         "╍╍♣",
+                "Engaged",             "╍╍" & UNICHAR ( 8987 ),
+                "Submitted",           "╍╍" & UNICHAR ( 128233 ),
+                "Onboarded",           "╍╍" & UNICHAR ( 9989 ),
+                                       "╍╍" & UNICHAR ( 128683 )
+            )
+            &
+            SWITCH (
+                [Cloud - Status],
+                "Awaiting TAO Action", "╍╍" & UNICHAR ( 10060 ),
+                "Active Design",       "╍╍" & UNICHAR ( 128295 ),
+                "In Progress1",        "╍╍▒",
+                "Pending Engagement",  "╍╍" & UNICHAR ( 128542 ),
+                "In Progress",         "╍╍♣",
+                "Engaged",             "╍╍" & UNICHAR ( 8987 ),
+                "Submitted",           "╍╍" & UNICHAR ( 128233 ),
+                "Onboarded",           "╍╍" & UNICHAR ( 9989 ),
+                                       "╍╍" & UNICHAR ( 128683 )
+            )
+    )

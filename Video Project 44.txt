@@ -1,0 +1,4719 @@
+1
+00:00:00,670 --> 00:00:03,234
+Just so you know the the service
+
+2
+00:00:03,234 --> 00:00:05,066
+principal requirements needed like the
+
+3
+00:00:05,066 --> 00:00:07,264
+permissions to do the sidecar deployments
+
+4
+00:00:07,264 --> 00:00:10,194
+to support SAS gaming and all that. Like
+
+5
+00:00:10,194 --> 00:00:13,125
+SharePoint. He did provide a doc that has
+
+6
+00:00:13,125 --> 00:00:16,096
+them but we wanted. A lot
+
+7
+00:00:16,096 --> 00:00:18,122
+of them are like a lot of permissions
+
+8
+00:00:18,122 --> 00:00:19,641
+listed say like conditional, whether it
+
+9
+00:00:19,641 --> 00:00:21,920
+like use this if you have this in scope,
+
+10
+00:00:21,920 --> 00:00:24,198
+use this if you have that in scope. But
+
+11
+00:00:24,198 --> 00:00:26,477
+we know our scope so we can figure out
+
+12
+00:00:26,477 --> 00:00:28,502
+which ones are effective. Like I want to
+
+13
+00:00:28,502 --> 00:00:30,528
+pair down that list and make sure that
+
+14
+00:00:30,528 --> 00:00:32,553
+when we present that to our IAM team,
+
+15
+00:00:32,553 --> 00:00:34,325
+we're just giving them like the exact,
+
+16
+00:00:34,325 --> 00:00:36,604
+this is what exactly it will take to to
+
+17
+00:00:36,604 --> 00:00:39,493
+go live with these sidecars. OK,
+
+18
+00:00:39,493 --> 00:00:42,121
+God is it is. I saw Howard know Howard on
+
+19
+00:00:42,121 --> 00:00:44,224
+now Howard had sent an e-mail last night
+
+20
+00:00:44,224 --> 00:00:46,590
+for an urgent call. Is that for the same?
+
+21
+00:00:47,030 --> 00:00:49,266
+Yeah. So what I'm doing, yeah. So the
+
+22
+00:00:49,266 --> 00:00:51,222
+idea is like we'll clean up the
+
+23
+00:00:51,222 --> 00:00:53,179
+permission list on this call today. And
+
+24
+00:00:53,179 --> 00:00:55,414
+then there will be that big call where
+
+25
+00:00:55,414 --> 00:00:57,091
+cloud engineering team and et cetera,
+
+26
+00:00:57,091 --> 00:00:59,607
+like we all get together at once. And if
+
+27
+00:00:59,607 --> 00:01:01,563
+they have any questions, then they can
+
+28
+00:01:01,563 --> 00:01:03,519
+bring those direct and then we'll at
+
+29
+00:01:03,519 --> 00:01:05,476
+least have the permissions and all that
+
+30
+00:01:05,476 --> 00:01:07,712
+in hand ready to go. So basically, we're
+
+31
+00:01:07,712 --> 00:01:08,550
+prepping for that.
+
+32
+00:01:11,070 --> 00:01:13,564
+Chad, is the call on the same day, your
+
+33
+00:01:13,564 --> 00:01:15,781
+your prep call and the and the meeting
+
+34
+00:01:15,781 --> 00:01:17,720
+with the internal team today is the
+
+35
+00:01:17,720 --> 00:01:19,937
+meeting and I think Dave is looking to
+
+36
+00:01:19,937 --> 00:01:21,877
+book that call probably on Monday or
+
+37
+00:01:21,877 --> 00:01:24,370
+Tuesday. I would think so. So we have a
+
+38
+00:01:24,370 --> 00:01:26,310
+but I don't think it's booked yet.
+
+39
+00:01:27,590 --> 00:01:30,514
+I think they're just so, so today the the
+
+40
+00:01:30,514 --> 00:01:33,437
+one or whatever time, the one NAV and I
+
+41
+00:01:33,437 --> 00:01:36,036
+are talking about that sort of prep call
+
+42
+00:01:36,036 --> 00:01:38,310
+with the side car and all that.
+
+43
+00:01:39,640 --> 00:01:42,072
+That's with Hagar Hagup and I think I
+
+44
+00:01:42,072 --> 00:01:44,504
+forwarded it to product too. Now, just in
+
+45
+00:01:44,504 --> 00:01:46,936
+case, I thought they should at least be
+
+46
+00:01:46,936 --> 00:01:49,672
+aware of Vamsi. They should be on to back
+
+47
+00:01:49,672 --> 00:01:52,104
+up. Yeah, they might. Yeah. Yeah. And I,
+
+48
+00:01:52,104 --> 00:01:54,840
+yeah, OK. I, I just 'cause I have a
+
+49
+00:01:54,840 --> 00:01:56,968
+couple different meetings for us for that
+
+50
+00:01:56,968 --> 00:01:59,400
+topic and I just want to make sure.
+
+51
+00:01:59,670 --> 00:02:02,035
+The times along with getting Chad the
+
+52
+00:02:02,035 --> 00:02:04,400
+answers you need for that section. Yeah,
+
+53
+00:02:04,400 --> 00:02:07,102
+I think we'll be good today. Yeah. So
+
+54
+00:02:07,102 --> 00:02:09,805
+in other words, we have some time to
+
+55
+00:02:09,805 --> 00:02:12,508
+talk it out and think it out and
+
+56
+00:02:12,508 --> 00:02:14,873
+strategize. It's not like you need this
+
+57
+00:02:14,873 --> 00:02:17,575
+for 3:00, is what I was getting, right?
+
+58
+00:02:17,575 --> 00:02:19,940
+Yeah. Yeah. We're adding reason and logic
+
+59
+00:02:19,940 --> 00:02:22,643
+today. So you're ready to go for next
+
+60
+00:02:22,643 --> 00:02:24,670
+week. All right. Cool. Thank you.
+
+61
+00:02:26,240 --> 00:02:29,095
+Take it over. I'm just using the time,
+
+62
+00:02:29,095 --> 00:02:31,985
+but yeah, so no, hey. Kind of
+
+63
+00:02:31,985 --> 00:02:34,067
+conflate a little bit. Sorry Harris and
+
+64
+00:02:34,067 --> 00:02:36,150
+everyone but and Harris, thanks for the
+
+65
+00:02:36,150 --> 00:02:38,232
+e-mail back to Chad. You're covering me
+
+66
+00:02:38,232 --> 00:02:40,612
+ahead of this call. I big help. Thank
+
+67
+00:02:40,612 --> 00:02:43,457
+you. That's a good segue,
+
+68
+00:02:43,457 --> 00:02:46,163
+Chad, to back to the ITM and
+
+69
+00:02:46,163 --> 00:02:49,037
+the. Endpoint side, because you're asking
+
+70
+00:02:49,037 --> 00:02:51,400
+questions about that. I think Harris, you
+
+71
+00:02:51,400 --> 00:02:52,750
+just answered them, right?
+
+72
+00:02:54,970 --> 00:02:57,284
+If you show up, if I, we didn't put you
+
+73
+00:02:57,284 --> 00:02:59,970
+to sleep. So yeah. Welcome back. All
+
+74
+00:02:59,970 --> 00:03:00,950
+right, Thank you.
+
+75
+00:03:07,080 --> 00:03:10,017
+Good morning. Hey, good
+
+76
+00:03:10,017 --> 00:03:12,374
+morning. Good morning. Yeah. And thank
+
+77
+00:03:12,374 --> 00:03:14,481
+you for that, Chad, for helping out
+
+78
+00:03:14,481 --> 00:03:16,587
+there. Yeah, even though he's no, he's,
+
+79
+00:03:16,587 --> 00:03:18,693
+he's no DSP related. Yeah, he's very
+
+80
+00:03:18,693 --> 00:03:20,799
+critical for us to have those resources
+
+81
+00:03:20,799 --> 00:03:23,206
+aligned on the on the ESPN side, right.
+
+82
+00:03:23,206 --> 00:03:25,914
+Like I, I will be, I will be the
+
+83
+00:03:25,914 --> 00:03:28,021
+person booking the call. I'll get there
+
+84
+00:03:28,021 --> 00:03:30,428
+to do it. But until we actually know
+
+85
+00:03:30,428 --> 00:03:33,136
+who's going to be jumping on the call, we
+
+86
+00:03:33,136 --> 00:03:35,543
+probably will hold on on our side because
+
+87
+00:03:35,543 --> 00:03:37,950
+I need to make sure that we have.
+
+88
+00:03:38,160 --> 00:03:40,560
+Certain resources from the PSI available
+
+89
+00:03:40,560 --> 00:03:43,526
+to join the call, right?I'll
+
+90
+00:03:43,526 --> 00:03:46,190
+just think back for you guys. So I don't
+
+91
+00:03:46,190 --> 00:03:48,262
+expect this one to choose maybe sometime
+
+92
+00:03:48,262 --> 00:03:50,630
+next week, but we'll have to make sure
+
+93
+00:03:50,630 --> 00:03:53,294
+that you know, we have the the, the, the
+
+94
+00:03:53,294 --> 00:03:55,070
+most amount of people available for
+
+95
+00:03:55,070 --> 00:03:56,846
+instant call. I have a question.
+
+96
+00:03:56,846 --> 00:03:59,214
+Actually, no, let me see who's on this
+
+97
+00:03:59,214 --> 00:04:02,049
+call. Hey, Howard, can
+
+98
+00:04:02,049 --> 00:04:04,794
+you do me a quick favor? We had
+
+99
+00:04:04,794 --> 00:04:07,196
+a discussion last week around the Google
+
+100
+00:04:07,196 --> 00:04:09,941
+Cloud Storage and I was able to see
+
+101
+00:04:09,941 --> 00:04:12,342
+that there are actually currently it is
+
+102
+00:04:12,342 --> 00:04:14,401
+supported, they fix whatever issues were
+
+103
+00:04:14,401 --> 00:04:16,803
+occurring prior, but it was hidden behind
+
+104
+00:04:16,803 --> 00:04:19,547
+the future toggle. So I had it enabled
+
+105
+00:04:19,547 --> 00:04:22,292
+for all three of the tenants. Would you
+
+106
+00:04:22,292 --> 00:04:25,037
+be able to see it now I see
+
+107
+00:04:25,037 --> 00:04:27,737
+them?I've I've checked out three
+
+108
+00:04:27,737 --> 00:04:30,503
+tenants and I see them. I see the option
+
+109
+00:04:30,503 --> 00:04:32,040
+Irish. Yeah, thanks for confirming.
+
+110
+00:04:33,270 --> 00:04:35,520
+And this goes back to the question that
+
+111
+00:04:35,520 --> 00:04:37,771
+we asked probably a week ago, a couple
+
+112
+00:04:37,771 --> 00:04:40,303
+weeks ago. How can we ensure that all the
+
+113
+00:04:40,303 --> 00:04:42,272
+needed flags are enabled in our tennis,
+
+114
+00:04:42,272 --> 00:04:44,241
+right? Like we keep finding little things
+
+115
+00:04:44,241 --> 00:04:46,210
+here when we missing this, we missing
+
+116
+00:04:46,210 --> 00:04:48,461
+that. Is there any way that somebody from
+
+117
+00:04:48,461 --> 00:04:51,143
+the back end can go over the?Everything
+
+118
+00:04:51,143 --> 00:04:53,472
+that is set up or the flags and make sure
+
+119
+00:04:53,472 --> 00:04:56,092
+that we have what we need. Somebody can
+
+120
+00:04:56,092 --> 00:04:58,350
+do a review from your side. That will be
+
+121
+00:04:58,350 --> 00:04:59,855
+helpful. Yeah, because we keep finding
+
+122
+00:04:59,855 --> 00:05:02,747
+things that are not enabled. This is
+
+123
+00:05:02,747 --> 00:05:05,350
+not the first and last one, guys. That's
+
+124
+00:05:05,350 --> 00:05:08,070
+for sure. I agree with Howard.
+
+125
+00:05:08,780 --> 00:05:11,501
+Do we need to open a ticket for that to
+
+126
+00:05:11,501 --> 00:05:13,679
+happen or how do you want to proceed?
+
+127
+00:05:13,679 --> 00:05:15,584
+Like, well, a lot of these features,
+
+128
+00:05:15,584 --> 00:05:17,761
+Howard, are just like by request. So you
+
+129
+00:05:17,761 --> 00:05:20,210
+have to open a ticket to get them enabled
+
+130
+00:05:20,210 --> 00:05:22,115
+like this. Google Cloud storage is now
+
+131
+00:05:22,115 --> 00:05:24,293
+hidden behind a toggle. So it's not that
+
+132
+00:05:24,293 --> 00:05:26,470
+we have them exposed for all the tenants
+
+133
+00:05:26,470 --> 00:05:28,375
+and your tenant was missing it. These
+
+134
+00:05:28,375 --> 00:05:30,008
+features are available only by request,
+
+135
+00:05:30,008 --> 00:05:32,457
+right? So no, I get I get that Harris,
+
+136
+00:05:32,457 --> 00:05:34,634
+but there there might be some of the
+
+137
+00:05:34,634 --> 00:05:36,539
+stuff that should be enabled by default
+
+138
+00:05:36,539 --> 00:05:39,309
+that we don't know if. That at this point
+
+139
+00:05:39,309 --> 00:05:41,147
+we don't know what we're missing like we
+
+140
+00:05:41,147 --> 00:05:42,986
+we found few things that that should have
+
+141
+00:05:42,986 --> 00:05:45,054
+been able in the past, right and I, I
+
+142
+00:05:45,054 --> 00:05:47,122
+would have to go back to my notes, right
+
+143
+00:05:47,122 --> 00:05:48,960
+and, and you guys have to enable it
+
+144
+00:05:48,960 --> 00:05:51,804
+because. Whatever reason they were turned
+
+145
+00:05:51,804 --> 00:05:54,065
+off, right? We're just trying to be
+
+146
+00:05:54,065 --> 00:05:56,325
+proactive or make sure that we've been
+
+147
+00:05:56,325 --> 00:05:57,939
+proactive and we don't encounter
+
+148
+00:05:57,939 --> 00:06:00,200
+something in production. Yeah, we have a
+
+149
+00:06:00,200 --> 00:06:02,783
+gap here. Oh, this is turned off, right?
+
+150
+00:06:02,783 --> 00:06:05,043
+That's what we're trying to avoid. Yeah.
+
+151
+00:06:05,043 --> 00:06:07,303
+However, the reason of the feature flag
+
+152
+00:06:07,303 --> 00:06:10,209
+is so that we could like slow roll out
+
+153
+00:06:10,209 --> 00:06:11,824
+new capabilities. Like oftentimes, unless
+
+154
+00:06:11,824 --> 00:06:14,730
+you have a reason to, you know, or, or
+
+155
+00:06:14,730 --> 00:06:16,990
+let's say you're asking for a feature.
+
+156
+00:06:17,280 --> 00:06:18,960
+Then then that's hidden behind the
+
+157
+00:06:18,960 --> 00:06:21,904
+feature flag, but. Yeah, I think it's
+
+158
+00:06:21,904 --> 00:06:24,064
+beneficial like to know what will be
+
+159
+00:06:24,064 --> 00:06:26,223
+coming up like as new capabilities and
+
+160
+00:06:26,223 --> 00:06:28,691
+things that you could opt in and start
+
+161
+00:06:28,691 --> 00:06:30,542
+testing in your lower environments. So
+
+162
+00:06:30,542 --> 00:06:33,319
+I'll try to work Eggers on with me Eggers
+
+163
+00:06:33,319 --> 00:06:35,479
+here, Tam like post, post cutoff plus
+
+164
+00:06:35,479 --> 00:06:37,947
+covert. We'll try to like work with like,
+
+165
+00:06:37,947 --> 00:06:40,415
+hey, these these are these are the the
+
+166
+00:06:40,415 --> 00:06:42,574
+road map and these are the enhancements.
+
+167
+00:06:42,574 --> 00:06:45,351
+And then we can we can go through like,
+
+168
+00:06:45,351 --> 00:06:47,510
+you know, what are the available feature
+
+169
+00:06:47,510 --> 00:06:49,670
+flags that you can opt into, right?
+
+170
+00:06:50,230 --> 00:06:52,667
+What you see in the UI is like
+
+171
+00:06:52,667 --> 00:06:54,495
+essentially what what is shipping and
+
+172
+00:06:54,495 --> 00:06:56,628
+then feature flags again are like the
+
+173
+00:06:56,628 --> 00:06:58,151
+features that might be limited
+
+174
+00:06:58,151 --> 00:07:00,284
+availability, beta and so forth. So some
+
+175
+00:07:00,284 --> 00:07:02,417
+things that might be like very early
+
+176
+00:07:02,417 --> 00:07:05,159
+would be toggled by a future flag. So we
+
+177
+00:07:05,159 --> 00:07:07,596
+will be something that be ready for like
+
+178
+00:07:07,596 --> 00:07:08,510
+a production rollout.
+
+179
+00:07:12,310 --> 00:07:14,793
+All right, thank you. All right. I'm
+
+180
+00:07:14,793 --> 00:07:17,631
+asked for this question and this is kind
+
+181
+00:07:17,631 --> 00:07:20,469
+of tied up a little bit about that.
+
+182
+00:07:20,469 --> 00:07:22,952
+We I got a notification around another
+
+183
+00:07:22,952 --> 00:07:25,435
+fee that that was that was submitted
+
+184
+00:07:25,435 --> 00:07:28,200
+07213862. The RFS
+
+185
+00:07:28,200 --> 00:07:29,1000
+implemented, and this is to prompt
+
+186
+00:07:29,1000 --> 00:07:32,100
+actions from Outlook. So if we actually
+
+187
+00:07:32,100 --> 00:07:34,200
+try to do something from Outlook, the
+
+188
+00:07:34,200 --> 00:07:36,600
+expectation is that we were going to get
+
+189
+00:07:36,600 --> 00:07:39,300
+a prompt or have the ability to provide a
+
+190
+00:07:39,300 --> 00:07:41,100
+prompt if somebody was doing something
+
+191
+00:07:41,100 --> 00:07:42,900
+rather than actually hook into the
+
+192
+00:07:42,900 --> 00:07:45,567
+application. I can't remember the
+
+193
+00:07:45,567 --> 00:07:47,692
+name that gestures for that, probably
+
+194
+00:07:47,692 --> 00:07:50,525
+remember that, but it seems that we now
+
+195
+00:07:50,525 --> 00:07:53,358
+have the ability to do so. How do
+
+196
+00:07:53,358 --> 00:07:56,192
+I confirm that that's possible and how do
+
+197
+00:07:56,192 --> 00:07:59,025
+we ensure that whatever was done here is
+
+198
+00:07:59,025 --> 00:08:01,150
+enabled for all the three tenants?
+
+199
+00:08:03,590 --> 00:08:05,752
+So this RFU was around prompt actions
+
+200
+00:08:05,752 --> 00:08:08,531
+like you would want to see like a prompt
+
+201
+00:08:08,531 --> 00:08:11,001
+pop up the same way it happens on
+
+202
+00:08:11,001 --> 00:08:13,784
+endpoint. Yes, this is this
+
+203
+00:08:13,784 --> 00:08:16,413
+is exactly what it is, right? Like we
+
+204
+00:08:16,413 --> 00:08:18,713
+submitted the the request, so it allows
+
+205
+00:08:18,713 --> 00:08:21,341
+to submit to have a prompt when we're
+
+206
+00:08:21,341 --> 00:08:23,641
+trying to move data or things. The
+
+207
+00:08:23,641 --> 00:08:25,613
+matches are detector when Outlook is
+
+208
+00:08:25,613 --> 00:08:28,470
+being used. So is somebody
+
+209
+00:08:28,470 --> 00:08:30,790
+trying to decide the application version
+
+210
+00:08:30,790 --> 00:08:33,110
+of Outlook, not the web version?
+
+211
+00:08:33,990 --> 00:08:36,710
+Correct. Yeah, I was. I thought that
+
+212
+00:08:36,710 --> 00:08:39,041
+was covered under the adaptive e-mail
+
+213
+00:08:39,041 --> 00:08:42,015
+DLP. So yeah, that's
+
+214
+00:08:42,015 --> 00:08:43,545
+interesting. Let me look at this right
+
+215
+00:08:43,545 --> 00:08:44,200
+now. I'm just.
+
+216
+00:08:46,310 --> 00:08:48,350
+I'm just looking at this RFP.
+
+217
+00:08:51,550 --> 00:08:54,347
+I only got the message saying it was
+
+218
+00:08:54,347 --> 00:08:56,444
+implemented, nothing else like a, you
+
+219
+00:08:56,444 --> 00:08:59,241
+know, do this, do that or yeah, let
+
+220
+00:08:59,241 --> 00:09:02,038
+me tell you, yeah, I think there's a
+
+221
+00:09:02,038 --> 00:09:04,136
+misunderstanding. I think we're, I want
+
+222
+00:09:04,136 --> 00:09:06,932
+the PS they it doesn't do it on
+
+223
+00:09:06,932 --> 00:09:09,030
+sand. It doesn't when it's attached.
+
+224
+00:09:09,830 --> 00:09:12,452
+Like yeah, yeah, yeah, exactly. So
+
+225
+00:09:12,452 --> 00:09:14,636
+there's attached to desktop application
+
+226
+00:09:14,636 --> 00:09:15,510
+where you.
+
+227
+00:09:17,320 --> 00:09:19,352
+Where you basically add a managed
+
+228
+00:09:19,352 --> 00:09:21,384
+application like that executable name. So
+
+229
+00:09:21,384 --> 00:09:24,093
+you would add the outlook EXE and then
+
+230
+00:09:24,093 --> 00:09:26,803
+you can prompt users when they attach a
+
+231
+00:09:26,803 --> 00:09:29,605
+sensitive file. Right, but when
+
+232
+00:09:29,605 --> 00:09:32,194
+they send out an e-mail that
+
+233
+00:09:32,194 --> 00:09:34,784
+has sensitive data, that's not going
+
+234
+00:09:34,784 --> 00:09:37,582
+to enable a prompt. We've
+
+235
+00:09:37,582 --> 00:09:38,670
+done the Howard though.
+
+236
+00:09:41,440 --> 00:09:44,310
+Power, are you? Is that the use
+
+237
+00:09:44,310 --> 00:09:46,360
+case that you're talking about?
+
+238
+00:09:47,230 --> 00:09:49,885
+Let me go back to the ticket. Give me a
+
+239
+00:09:49,885 --> 00:09:52,349
+second. Yeah,
+
+240
+00:09:52,349 --> 00:09:54,784
+I'm very clear. Like
+
+241
+00:09:54,784 --> 00:09:57,220
+piano misunderstood you require.
+
+242
+00:10:05,280 --> 00:10:08,045
+Let's look at it together. It's
+
+243
+00:10:08,045 --> 00:10:10,729
+been a while. The comment that he left
+
+244
+00:10:10,729 --> 00:10:13,413
+the PM was he He mentioned that there
+
+245
+00:10:13,413 --> 00:10:16,097
+was a feature on 5.1 to detect and
+
+246
+00:10:16,097 --> 00:10:17,775
+prevent sensitive attachments to Outlook
+
+247
+00:10:17,775 --> 00:10:20,150
+messages. This control is applied when
+
+248
+00:10:20,150 --> 00:10:22,390
+file is attached, not when e-mail issent.
+
+249
+00:10:30,410 --> 00:10:33,170
+So if you're attaching an e-mail,
+
+250
+00:10:33,170 --> 00:10:35,930
+I'm guessing we can actually have
+
+251
+00:10:35,930 --> 00:10:38,870
+a wireless. That doesn't
+
+252
+00:10:38,870 --> 00:10:41,510
+trigger that action when is an
+
+253
+00:10:41,510 --> 00:10:44,150
+internal recipient, but what if they're
+
+254
+00:10:44,150 --> 00:10:46,790
+mixed recipients? How this will react?
+
+255
+00:10:49,460 --> 00:10:52,073
+Uh, pendant requests aside, sorry, let
+
+256
+00:10:52,073 --> 00:10:54,790
+me just go. It
+
+257
+00:10:54,790 --> 00:10:56,230
+should be rending it.
+
+258
+00:10:57,990 --> 00:11:00,150
+Yeah. Remember, this doesn't look our
+
+259
+00:11:00,150 --> 00:11:02,310
+recipients. This is from the application
+
+260
+00:11:02,310 --> 00:11:05,067
+perspective, Howard. Yeah, yeah, I know.
+
+261
+00:11:05,067 --> 00:11:07,372
+Just thinking out loud or something. I
+
+262
+00:11:07,372 --> 00:11:08,030
+tend to.
+
+263
+00:11:10,640 --> 00:11:13,467
+Yeah, and I, I, I tested this, the
+
+264
+00:11:13,467 --> 00:11:14,880
+file picker doesn't work.
+
+265
+00:11:17,190 --> 00:11:19,999
+With our with our version of Outlook, I
+
+266
+00:11:19,999 --> 00:11:20,350
+think.
+
+267
+00:11:22,750 --> 00:11:25,442
+Yeah. So they, yeah, so they, they
+
+268
+00:11:25,442 --> 00:11:27,750
+didn't understand the the, the request.
+
+269
+00:11:28,670 --> 00:11:31,019
+This is not what we were asking. This is
+
+270
+00:11:31,019 --> 00:11:32,847
+what was the request. Sorry, how? What
+
+271
+00:11:32,847 --> 00:11:35,631
+was the request?Alright,
+
+272
+00:11:35,631 --> 00:11:38,505
+to finally enable us to show a
+
+273
+00:11:38,505 --> 00:11:40,969
+prompt whenever the user attempts to
+
+274
+00:11:40,969 --> 00:11:43,910
+send. Sensitive data
+
+275
+00:11:43,910 --> 00:11:46,470
+not attach. Yeah.
+
+276
+00:11:48,480 --> 00:11:51,425
+But I did just send him a message. I I do
+
+277
+00:11:51,425 --> 00:11:53,834
+send him a message on Teams and I just
+
+278
+00:11:53,834 --> 00:11:55,440
+clarified like what the ask was.
+
+279
+00:11:57,840 --> 00:12:00,287
+And I've opened up the case and I've
+
+280
+00:12:00,287 --> 00:12:02,428
+added clarification and a link to the
+
+281
+00:12:02,428 --> 00:12:03,040
+semantic documentation.
+
+282
+00:12:07,900 --> 00:12:08,140
+OK.
+
+283
+00:12:10,790 --> 00:12:13,559
+All right, perfect. All right, so
+
+284
+00:12:13,559 --> 00:12:16,328
+we'll wait for this. Now another
+
+285
+00:12:16,328 --> 00:12:19,064
+question. The the
+
+286
+00:12:19,064 --> 00:12:21,808
+stuff around the Super admin, how do
+
+287
+00:12:21,808 --> 00:12:22,200
+you?
+
+288
+00:12:24,990 --> 00:12:27,674
+Yeah, I think you're talking about on on
+
+289
+00:12:27,674 --> 00:12:29,351
+unified management. Yeah, that that's
+
+290
+00:12:29,351 --> 00:12:32,035
+something that we'll have to work on. How
+
+291
+00:12:32,035 --> 00:12:34,718
+do you want to lock that down? Like
+
+292
+00:12:34,718 --> 00:12:37,402
+do you want to only restrict, have a
+
+293
+00:12:37,402 --> 00:12:39,750
+super? The Superman account has to exist?
+
+294
+00:12:41,550 --> 00:12:44,402
+Um, we, we, we're going to add ironing or
+
+295
+00:12:44,402 --> 00:12:46,937
+obviously we can audit in, in pod like
+
+296
+00:12:46,937 --> 00:12:48,838
+our cloud admin. If there's changes,
+
+297
+00:12:48,838 --> 00:12:51,056
+there's audit actions in the left hand
+
+298
+00:12:51,056 --> 00:12:53,908
+menu. We are going to add audit log any
+
+299
+00:12:53,908 --> 00:12:56,443
+changes to like that's done by that user
+
+300
+00:12:56,443 --> 00:12:57,710
+in the actual UI.
+
+301
+00:12:59,760 --> 00:13:02,142
+That that's that's coming later in Q3 or
+
+302
+00:13:02,142 --> 00:13:04,227
+early Q4. The other things to consider
+
+303
+00:13:04,227 --> 00:13:07,204
+too is that we are going to come up with
+
+304
+00:13:07,204 --> 00:13:10,150
+an API. And maybe what we
+
+305
+00:13:10,150 --> 00:13:11,350
+can do is, you know.
+
+306
+00:13:13,030 --> 00:13:15,690
+Lock that super admin account with and
+
+307
+00:13:15,690 --> 00:13:18,350
+then use the API only to manage
+
+308
+00:13:18,350 --> 00:13:21,010
+it. But maybe what we can do
+
+309
+00:13:21,010 --> 00:13:23,670
+is maybe have a call between E
+
+310
+00:13:23,670 --> 00:13:26,330
+messaging and and to see how how
+
+311
+00:13:26,330 --> 00:13:28,990
+you guys want to like ensure that
+
+312
+00:13:28,990 --> 00:13:31,270
+that account is not being abused.
+
+313
+00:13:34,490 --> 00:13:37,208
+Yeah, I'll set up an Internet call is
+
+314
+00:13:37,208 --> 00:13:39,585
+not against not being abused, right? Like
+
+315
+00:13:39,585 --> 00:13:42,303
+they, they, they, you know, we have to
+
+316
+00:13:42,303 --> 00:13:44,681
+think about the worst case simply going
+
+317
+00:13:44,681 --> 00:13:47,059
+wrong on the messaging side and, you
+
+318
+00:13:47,059 --> 00:13:49,097
+know, doing something that the shooting,
+
+319
+00:13:49,097 --> 00:13:51,814
+right. If we can actually have all the
+
+320
+00:13:51,814 --> 00:13:54,192
+alerts or anything or totally disable it,
+
+321
+00:13:54,192 --> 00:13:56,570
+right. That that, that would be great.
+
+322
+00:13:58,840 --> 00:14:00,707
+Let me ask you this, what's the reason
+
+323
+00:14:00,707 --> 00:14:03,040
+why we have a super admin? What we can do
+
+324
+00:14:03,040 --> 00:14:04,907
+with that account that any that that a
+
+325
+00:14:04,907 --> 00:14:05,840
+regular role cannot do?
+
+326
+00:14:11,440 --> 00:14:14,387
+Yeah. I mean, it's it's so that you
+
+327
+00:14:14,387 --> 00:14:16,966
+don't get locked out. But you're right,
+
+328
+00:14:16,966 --> 00:14:18,440
+we could potentially just.
+
+329
+00:14:20,760 --> 00:14:22,520
+Well, the Super Admin.
+
+330
+00:14:23,670 --> 00:14:26,216
+You eat that you you have to break the
+
+331
+00:14:26,216 --> 00:14:27,913
+glass account, right? Yeah, that's not
+
+332
+00:14:27,913 --> 00:14:30,459
+what it is. So you have that, you have
+
+333
+00:14:30,459 --> 00:14:31,590
+your product put admin.
+
+334
+00:14:33,320 --> 00:14:35,609
+Still not sure why we we need a super
+
+335
+00:14:35,609 --> 00:14:36,880
+admin that that overrides everything.
+
+336
+00:14:39,230 --> 00:14:41,851
+Yeah. Can we disable that? That
+
+337
+00:14:41,851 --> 00:14:44,472
+that could be an option too.
+
+338
+00:14:44,472 --> 00:14:47,092
+Like we disabled the Super admin
+
+339
+00:14:47,092 --> 00:14:49,713
+account, so that's not an option
+
+340
+00:14:49,713 --> 00:14:50,150
+today.
+
+341
+00:14:53,120 --> 00:14:55,012
+Just wondering, yeah, let me you know
+
+342
+00:14:55,012 --> 00:14:57,174
+what guys continue with the call. Let me
+
+343
+00:14:57,174 --> 00:14:59,877
+let me look and see if I I have the
+
+344
+00:14:59,877 --> 00:15:02,579
+ability to do so. It might, it might be a
+
+345
+00:15:02,579 --> 00:15:04,880
+support request. OK.
+
+346
+00:15:05,710 --> 00:15:08,223
+So let me know that once you figure that
+
+347
+00:15:08,223 --> 00:15:10,737
+out and then I'll book a call with Daniel
+
+348
+00:15:10,737 --> 00:15:13,529
+and the rest of the team and see how we
+
+349
+00:15:13,529 --> 00:15:15,484
+want to move forward with this, right?
+
+350
+00:15:15,484 --> 00:15:17,439
+It's in the best interest in hours,
+
+351
+00:15:17,439 --> 00:15:19,673
+right? Because they might get hit by a
+
+352
+00:15:19,673 --> 00:15:22,561
+finding for having this. Over privileged
+
+353
+00:15:22,561 --> 00:15:25,309
+to go right, we might get he would have
+
+354
+00:15:25,309 --> 00:15:27,751
+found it because we we have a possibility
+
+355
+00:15:27,751 --> 00:15:29,583
+of their filtration because somebody goes
+
+356
+00:15:29,583 --> 00:15:31,110
+wrong or something like that.
+
+357
+00:15:32,750 --> 00:15:33,997
+The question is, who's still going to
+
+358
+00:15:33,997 --> 00:15:34,710
+take the rest there?
+
+359
+00:15:37,520 --> 00:15:38,160
+All right, perfect.
+
+360
+00:15:40,200 --> 00:15:43,197
+Quick question, so I I know there was an
+
+361
+00:15:43,197 --> 00:15:45,195
+ask around providing some benchmark data
+
+362
+00:15:45,195 --> 00:15:47,192
+for the EDM hashing process. You
+
+363
+00:15:47,192 --> 00:15:49,856
+mentioned 8 gig file size. Do you know
+
+364
+00:15:49,856 --> 00:15:52,187
+approximately how many cells are in that
+
+365
+00:15:52,187 --> 00:15:52,520
+file?
+
+366
+00:15:55,530 --> 00:15:58,222
+No, I, I I won't be able
+
+367
+00:15:58,222 --> 00:16:00,530
+to answer that. Do we have?
+
+368
+00:16:02,960 --> 00:16:05,360
+The call on this call, yes you are.
+
+369
+00:16:06,890 --> 00:16:08,970
+Do you remember how many shelves do we
+
+370
+00:16:08,970 --> 00:16:10,010
+have on that Indian?
+
+371
+00:16:14,350 --> 00:16:16,407
+Like approximate doesn't need to be
+
+372
+00:16:16,407 --> 00:16:16,750
+excite.
+
+373
+00:16:20,140 --> 00:16:22,816
+Does it have the parent prod both or
+
+374
+00:16:22,816 --> 00:16:25,794
+just the prod?Essential
+
+375
+00:16:25,794 --> 00:16:27,741
+production, that's the one that we're
+
+376
+00:16:27,741 --> 00:16:28,390
+concerned about.
+
+377
+00:16:30,980 --> 00:16:33,700
+No, no, those are 4 columns, can be
+
+378
+00:16:33,700 --> 00:16:36,597
+4 cells. So
+
+379
+00:16:36,597 --> 00:16:39,545
+these 4 columns and then you have like a
+
+380
+00:16:39,545 --> 00:16:42,165
+a whole bunch of millions of records. How
+
+381
+00:16:42,165 --> 00:16:44,457
+do you remember how many, how many
+
+382
+00:16:44,457 --> 00:16:46,750
+records do you have there? My name?
+
+383
+00:16:48,750 --> 00:16:50,910
+I don't have exact number but.
+
+384
+00:16:53,310 --> 00:16:54,817
+Close
+
+385
+00:16:54,817 --> 00:16:56,323
+like
+
+386
+00:16:56,323 --> 00:16:59,043
+160,000. Less than
+
+387
+00:16:59,043 --> 00:17:01,790
+200,000 for the US. And
+
+388
+00:17:01,790 --> 00:17:04,190
+less than 150,000 for the Canadian.
+
+389
+00:17:05,540 --> 00:17:08,300
+So 160,000 *
+
+390
+00:17:08,300 --> 00:17:10,990
+4. Yes.
+
+391
+00:17:12,420 --> 00:17:14,292
+But depending if it's a monthly file,
+
+392
+00:17:14,292 --> 00:17:16,432
+it's a monthly, then it's going to be
+
+393
+00:17:16,432 --> 00:17:19,340
+more. But if it's a daily then.
+
+394
+00:17:20,700 --> 00:17:22,780
+It's going to be at least 1000 thousand.
+
+395
+00:17:24,570 --> 00:17:26,890
+Yeah, yeah. No, we, we're trying to to
+
+396
+00:17:26,890 --> 00:17:28,920
+kind of estimate for the bigger file,
+
+397
+00:17:28,920 --> 00:17:30,950
+right, That that's what it's going to
+
+398
+00:17:30,950 --> 00:17:32,980
+cost The, the, the, the, the bigger
+
+399
+00:17:32,980 --> 00:17:35,300
+overhead, the delta. Not to worry. If you
+
+400
+00:17:35,300 --> 00:17:37,620
+can actually do the big one, the data
+
+401
+00:17:37,620 --> 00:17:40,584
+should be fine. If you want I
+
+402
+00:17:40,584 --> 00:17:43,232
+can query within the. I forgot the not
+
+403
+00:17:43,232 --> 00:17:45,881
+the EDPP, but it's a different team. Now
+
+404
+00:17:45,881 --> 00:17:48,860
+I can ask my resource and get you the.
+
+405
+00:17:49,540 --> 00:17:52,140
+Like props number close to
+
+406
+00:17:52,140 --> 00:17:53,940
+the. What it's really?
+
+407
+00:17:55,060 --> 00:17:57,885
+Yes, please, if you can, yeah, I, I
+
+408
+00:17:57,885 --> 00:18:00,357
+connected with the product owner of the
+
+409
+00:18:00,357 --> 00:18:03,181
+EDM tool and you know, he was just
+
+410
+00:18:03,181 --> 00:18:05,300
+wanting some more information like how
+
+411
+00:18:05,300 --> 00:18:08,125
+big the files, how many cells, So the
+
+412
+00:18:08,125 --> 00:18:10,597
+more info we could provide to him,
+
+413
+00:18:10,597 --> 00:18:13,068
+hopefully he can give us some, some
+
+414
+00:18:13,068 --> 00:18:14,834
+benchmarking data back around the
+
+415
+00:18:14,834 --> 00:18:17,770
+processing time. Right, OK. And and one
+
+416
+00:18:17,770 --> 00:18:20,507
+more question, I don't know if Howard and
+
+417
+00:18:20,507 --> 00:18:22,901
+Fernando asked about this, but what if
+
+418
+00:18:22,901 --> 00:18:25,638
+one of the value within one of the
+
+419
+00:18:25,638 --> 00:18:28,496
+column?What? It's
+
+420
+00:18:28,496 --> 00:18:31,140
+an empty space, you know, How does
+
+421
+00:18:31,140 --> 00:18:33,784
+the point handles that when it crosses
+
+422
+00:18:33,784 --> 00:18:34,540
+the EDM?
+
+423
+00:18:38,760 --> 00:18:40,200
+You remember how we had?
+
+424
+00:18:41,820 --> 00:18:44,467
+I mean, yeah, I'm missing data so you
+
+425
+00:18:44,467 --> 00:18:47,115
+know some of the account number have the
+
+426
+00:18:47,115 --> 00:18:49,100
+alias name and the account name.
+
+427
+00:18:49,820 --> 00:18:52,640
+Right. But if let's say there is no alias
+
+428
+00:18:52,640 --> 00:18:54,833
+name, just only account name. Now how
+
+429
+00:18:54,833 --> 00:18:57,340
+does the proof point handle this data? I
+
+430
+00:18:57,340 --> 00:18:59,847
+mean does it does it stop processing or
+
+431
+00:18:59,847 --> 00:19:02,667
+you know its process or it has to be
+
+432
+00:19:02,667 --> 00:19:02,980
+something?
+
+433
+00:19:06,800 --> 00:19:08,791
+Give me one second. I believe there was
+
+434
+00:19:08,791 --> 00:19:11,700
+a. I believe
+
+435
+00:19:11,700 --> 00:19:13,940
+this is included in the document I just
+
+436
+00:19:13,940 --> 00:19:16,620
+saw recently. Let's
+
+437
+00:19:16,620 --> 00:19:18,540
+stop Cherry.
+
+438
+00:19:23,730 --> 00:19:26,165
+What's your question, man? Can you ask
+
+439
+00:19:26,165 --> 00:19:28,252
+that again, please? I didn't inquire.
+
+440
+00:19:28,252 --> 00:19:30,339
+Yeah, no problem. No problem, Fernando.
+
+441
+00:19:30,339 --> 00:19:32,993
+So we have total. 5 columns
+
+442
+00:19:32,993 --> 00:19:35,420
+right and let you know. We have
+
+443
+00:19:35,420 --> 00:19:37,846
+previously when we worked with the ADP
+
+444
+00:19:37,846 --> 00:19:40,619
+team, there were a use case where when
+
+445
+00:19:40,619 --> 00:19:43,392
+we getting the the raw files and some
+
+446
+00:19:43,392 --> 00:19:46,165
+of the column does not have any value.
+
+447
+00:19:46,165 --> 00:19:48,591
+So let's say there's an account name,
+
+448
+00:19:48,591 --> 00:19:51,018
+then the alias name and then account
+
+449
+00:19:51,018 --> 00:19:53,444
+number, then first name, last name. But
+
+450
+00:19:53,444 --> 00:19:56,217
+let's see for example, there is no alias
+
+451
+00:19:56,217 --> 00:19:58,990
+name but it does have the account name.
+
+452
+00:19:58,990 --> 00:20:01,417
+How does the proof point process this
+
+453
+00:20:01,417 --> 00:20:03,457
+file does?It like space you mean?Yes,
+
+454
+00:20:03,457 --> 00:20:05,955
+blank space, correct? How does the flip
+
+455
+00:20:05,955 --> 00:20:08,454
+point handle the blank the blank space?
+
+456
+00:20:08,454 --> 00:20:11,309
+Does it have to be something within that
+
+457
+00:20:11,309 --> 00:20:13,980
+blank space or?It's OK.
+
+458
+00:20:15,020 --> 00:20:17,432
+To me it should be an empty field, right?
+
+459
+00:20:17,432 --> 00:20:20,410
+So. Should be now.
+
+460
+00:20:21,580 --> 00:20:21,660
+Uh.
+
+461
+00:20:26,280 --> 00:20:29,131
+Then the detection has to be placed
+
+462
+00:20:29,131 --> 00:20:32,130
+on the Cam. Sorry. Account name
+
+463
+00:20:32,130 --> 00:20:34,895
+not based on areas and it should
+
+464
+00:20:34,895 --> 00:20:37,660
+process the path as a success result.
+
+465
+00:20:39,390 --> 00:20:41,022
+But just an additional question because
+
+466
+00:20:41,022 --> 00:20:43,198
+this was one of the challenging when we
+
+467
+00:20:43,198 --> 00:20:44,830
+set up the EDM into the.
+
+468
+00:20:47,940 --> 00:20:48,780
+Uh, that's the.
+
+469
+00:20:52,840 --> 00:20:54,810
+Yeah, I'll, I'll send you an e-mail today
+
+470
+00:20:54,810 --> 00:20:57,273
+on that man, I, I have, I just read this
+
+471
+00:20:57,273 --> 00:20:58,997
+somewhere recently on a document, so I
+
+472
+00:20:58,997 --> 00:21:00,967
+just have to dig through and find it
+
+473
+00:21:00,967 --> 00:21:02,937
+again. But we do have like an answer
+
+474
+00:21:02,937 --> 00:21:04,907
+there. So I'll, I'll, I'll send you an
+
+475
+00:21:04,907 --> 00:21:07,700
+e-mail today. OK, sounds perfect
+
+476
+00:21:07,700 --> 00:21:08,780
+to me. Thanks.
+
+477
+00:21:12,420 --> 00:21:15,167
+OK. Perfect, thank you, Monet. I
+
+478
+00:21:15,167 --> 00:21:17,880
+I don't I don't have anything else on my
+
+479
+00:21:17,880 --> 00:21:20,593
+list. I got some of the stuff that I
+
+480
+00:21:20,593 --> 00:21:22,703
+still dealing with, but I live Fernando,
+
+481
+00:21:22,703 --> 00:21:25,416
+the rest of the guy, you know, you know
+
+482
+00:21:25,416 --> 00:21:27,827
+any any questions that we have or any
+
+483
+00:21:27,827 --> 00:21:30,239
+help with the need. So go ahead, Fernando
+
+484
+00:21:30,239 --> 00:21:30,540
+cash.
+
+485
+00:21:33,140 --> 00:21:36,020
+I do have a question around.
+
+486
+00:21:37,350 --> 00:21:39,977
+Around the 8 integration, I'm actually in
+
+487
+00:21:39,977 --> 00:21:42,603
+the process of submitting the tickets so
+
+488
+00:21:42,603 --> 00:21:45,230
+hopefully our Tam can pick that up.
+
+489
+00:21:46,170 --> 00:21:48,776
+In regards to the user catalog,
+
+490
+00:21:48,776 --> 00:21:51,383
+yeah. Identity only
+
+491
+00:21:51,383 --> 00:21:51,890
+integration.
+
+492
+00:21:54,220 --> 00:21:56,792
+I was look I was reviewing the Azure
+
+493
+00:21:56,792 --> 00:21:58,721
+application that got create that was
+
+494
+00:21:58,721 --> 00:22:00,971
+authorized on our side. There isn't much
+
+495
+00:22:00,971 --> 00:22:02,900
+I can look at right now.
+
+496
+00:22:04,980 --> 00:22:07,096
+So anything that you could see in your
+
+497
+00:22:07,096 --> 00:22:09,476
+locks in the back end that could help us
+
+498
+00:22:09,476 --> 00:22:11,062
+figure that out, that would be
+
+499
+00:22:11,062 --> 00:22:12,649
+appreciated. So I'm going to be
+
+500
+00:22:12,649 --> 00:22:14,236
+submitting the ticket right after this
+
+501
+00:22:14,236 --> 00:22:16,090
+call. OK.
+
+502
+00:22:17,290 --> 00:22:18,933
+Could it be possible that we're not
+
+503
+00:22:18,933 --> 00:22:20,341
+seeing that option because another flag
+
+504
+00:22:20,341 --> 00:22:22,980
+is disabled?No.
+
+505
+00:22:24,980 --> 00:22:27,733
+Sorry, I had to ask a question. No, no,
+
+506
+00:22:27,733 --> 00:22:30,486
+I mean, I don't blame you now for how
+
+507
+00:22:30,486 --> 00:22:32,934
+many enabled, but no, that one is just
+
+508
+00:22:32,934 --> 00:22:34,769
+the agent realm switch, which we
+
+509
+00:22:34,769 --> 00:22:36,911
+confirmed last week that you have on.
+
+510
+00:22:36,911 --> 00:22:38,746
+That's a pretty standard integration. So
+
+511
+00:22:38,746 --> 00:22:40,888
+I'm not sure exactly why that's not
+
+512
+00:22:40,888 --> 00:22:42,723
+showing. Still, is there anything that
+
+513
+00:22:42,723 --> 00:22:45,476
+else that I have to do on my side
+
+514
+00:22:45,476 --> 00:22:48,456
+from the from the?From
+
+515
+00:22:48,456 --> 00:22:51,284
+the Azure application perspective, no,
+
+516
+00:22:51,284 --> 00:22:54,222
+that's. Yeah, The thing
+
+517
+00:22:54,222 --> 00:22:55,815
+is that I don't have any documentation,
+
+518
+00:22:55,815 --> 00:22:57,180
+so that's why I'm asking, right?
+
+519
+00:22:58,930 --> 00:23:01,330
+Yeah, no, as long as you're not, you guys
+
+520
+00:23:01,330 --> 00:23:03,197
+haven't revoked any of the permissions on
+
+521
+00:23:03,197 --> 00:23:05,063
+the Azure side, then there's nothing else
+
+522
+00:23:05,063 --> 00:23:06,930
+it creates like the app registration on
+
+523
+00:23:06,930 --> 00:23:08,797
+its own. So there shouldn't be anything
+
+524
+00:23:08,797 --> 00:23:10,930
+you need to do on the Azure side.
+
+525
+00:23:13,830 --> 00:23:16,372
+So the permissions I'm looking at them as
+
+526
+00:23:16,372 --> 00:23:18,597
+Group read all, Director read all and
+
+527
+00:23:18,597 --> 00:23:19,550
+User read all.
+
+528
+00:23:21,420 --> 00:23:24,145
+For read all groups, redirect your data
+
+529
+00:23:24,145 --> 00:23:26,869
+and read all users profile. Those are
+
+530
+00:23:26,869 --> 00:23:29,205
+what the three permissions that were
+
+531
+00:23:29,205 --> 00:23:31,540
+actually given to this application and.
+
+532
+00:23:33,660 --> 00:23:36,180
+The admin provided consent for those.
+
+533
+00:23:37,530 --> 00:23:40,431
+OK, so I'm I'm looking at the at
+
+534
+00:23:40,431 --> 00:23:43,333
+the at the proof of an identity collector
+
+535
+00:23:43,333 --> 00:23:46,234
+application right now from our side and I
+
+536
+00:23:46,234 --> 00:23:48,410
+see those 3 permissions are given.
+
+537
+00:23:51,620 --> 00:23:52,660
+They're not revoked.
+
+538
+00:23:54,790 --> 00:23:57,377
+Yep, that's fine. Yeah, under
+
+539
+00:23:57,377 --> 00:23:59,963
+user group there's a. There's
+
+540
+00:23:59,963 --> 00:24:02,550
+a section under user group.
+
+541
+00:24:03,210 --> 00:24:06,019
+Am I supposed to assign any groups in
+
+542
+00:24:06,019 --> 00:24:06,370
+here?
+
+543
+00:24:09,830 --> 00:24:12,681
+Under the full front. Under the proof of
+
+544
+00:24:12,681 --> 00:24:13,750
+an identity collector.
+
+545
+00:24:15,470 --> 00:24:17,687
+You're looking at the Azure side, right?
+
+546
+00:24:17,687 --> 00:24:19,903
+Yeah, I'm looking at the Azure site.
+
+547
+00:24:19,903 --> 00:24:22,120
+Yeah. No, you shouldn't have to assign
+
+548
+00:24:22,120 --> 00:24:24,874
+anything in there. It should just be
+
+549
+00:24:24,874 --> 00:24:27,750
+pulling the identity on its own. Mm-hmm.
+
+550
+00:24:27,750 --> 00:24:30,535
+OK. OK,
+
+551
+00:24:30,535 --> 00:24:33,058
+Anything that you require from
+
+552
+00:24:33,058 --> 00:24:35,581
+our side when I opened
+
+553
+00:24:35,581 --> 00:24:36,590
+the case.
+
+554
+00:24:39,230 --> 00:24:41,357
+No, I don't think so. I mean, if they
+
+555
+00:24:41,357 --> 00:24:42,775
+need anything to support the support
+
+556
+00:24:42,775 --> 00:24:44,430
+resource, we'll let you know. But I.
+
+557
+00:24:47,230 --> 00:24:49,816
+They might ask for like the realm config
+
+558
+00:24:49,816 --> 00:24:52,401
+file that we looked at last time. They
+
+559
+00:24:52,401 --> 00:24:54,987
+might ask for that, but I'm not entirely
+
+560
+00:24:54,987 --> 00:24:55,310
+sure.
+
+561
+00:24:58,020 --> 00:24:58,340
+OK.
+
+562
+00:25:04,370 --> 00:25:07,090
+I had two questions on. About
+
+563
+00:25:07,090 --> 00:25:10,010
+the ITM piece. Thank you.
+
+564
+00:25:10,890 --> 00:25:11,730
+OK, so.
+
+565
+00:25:13,700 --> 00:25:16,400
+How many? Do you know how many
+
+566
+00:25:16,400 --> 00:25:19,100
+endpoint licenses we have for the ITM?
+
+567
+00:25:20,610 --> 00:25:23,446
+Cloud. Because when I
+
+568
+00:25:23,446 --> 00:25:26,050
+log into the production it says 3000.
+
+569
+00:25:26,690 --> 00:25:29,490
+OK, I'm not sure if the NAV
+
+570
+00:25:29,490 --> 00:25:32,290
+thing navs will be have that information.
+
+571
+00:25:33,250 --> 00:25:36,028
+What tenant are you looking at? How
+
+572
+00:25:36,028 --> 00:25:38,410
+many? How many? How many endpoint?
+
+573
+00:25:39,050 --> 00:25:41,010
+For crowd here it says 3000 on prod.
+
+574
+00:25:42,490 --> 00:25:44,460
+Is that correct or do we have more 'cause
+
+575
+00:25:44,460 --> 00:25:46,650
+I know we have the issue with the on Prem?
+
+576
+00:25:47,570 --> 00:25:49,603
+Trying to move some of the licenses from
+
+577
+00:25:49,603 --> 00:25:51,890
+the cloud to the Prem and all that stuff.
+
+578
+00:25:53,410 --> 00:25:56,374
+Do you know?Give me
+
+579
+00:25:56,374 --> 00:25:59,144
+a second, I can look it up. OK, and also
+
+580
+00:25:59,144 --> 00:26:01,638
+go ahead. So I have a question to follow
+
+581
+00:26:01,638 --> 00:26:03,300
+up on that, but go ahead.
+
+582
+00:26:04,290 --> 00:26:06,852
+And also what happens when, because this
+
+583
+00:26:06,852 --> 00:26:09,781
+is a question that was asked by the
+
+584
+00:26:09,781 --> 00:26:12,709
+ATM team, what happens when we go over
+
+585
+00:26:12,709 --> 00:26:15,638
+that license? Is there a way to let
+
+586
+00:26:15,638 --> 00:26:18,551
+us know?At that point that
+
+587
+00:26:18,551 --> 00:26:21,235
+we are using more than a real license
+
+588
+00:26:21,235 --> 00:26:24,098
+for. Yes, yes. So you
+
+589
+00:26:24,098 --> 00:26:26,352
+should see a banner actually when you
+
+590
+00:26:26,352 --> 00:26:29,249
+sign into the tenant at the top of the
+
+591
+00:26:29,249 --> 00:26:31,503
+screen, but there's other ways of also
+
+592
+00:26:31,503 --> 00:26:33,757
+checking how many you're using. Are you
+
+593
+00:26:33,757 --> 00:26:36,011
+signed into the console, Mom? Yeah, Yeah,
+
+594
+00:26:36,011 --> 00:26:38,909
+I think I know. Let me share my screen.
+
+595
+00:26:38,909 --> 00:26:41,807
+Hold on a second. Yeah. If you open the
+
+596
+00:26:41,807 --> 00:26:44,382
+workbench, you should be able to run a
+
+597
+00:26:44,382 --> 00:26:46,636
+coverage report and it should show you
+
+598
+00:26:46,636 --> 00:26:48,568
+how many licenses you're consuming right
+
+599
+00:26:48,568 --> 00:26:51,090
+now. OK, Mark Bench.
+
+600
+00:26:56,370 --> 00:26:59,050
+So on the left hand side under reports.
+
+601
+00:26:59,850 --> 00:27:02,575
+All the data security, OK.
+
+602
+00:27:02,575 --> 00:27:05,300
+And then at the top,
+
+603
+00:27:05,300 --> 00:27:08,025
+if you just click on
+
+604
+00:27:08,025 --> 00:27:10,991
+coverage. OK. All right. So yeah, I
+
+605
+00:27:10,991 --> 00:27:12,812
+mean, you guys don't have anything
+
+606
+00:27:12,812 --> 00:27:14,937
+deployed here except for DLP. It looks
+
+607
+00:27:14,937 --> 00:27:17,669
+like you have 6 users, but if you Scroll
+
+608
+00:27:17,669 --> 00:27:19,490
+down, it'll show you actually per.
+
+609
+00:27:20,730 --> 00:27:23,407
+Tool like OK so your QA yeah so
+
+610
+00:27:23,407 --> 00:27:25,750
+you're you're in this tenant so this
+
+611
+00:27:25,750 --> 00:27:28,427
+tenant provision like but this is how you
+
+612
+00:27:28,427 --> 00:27:30,769
+check it yeah okay okay definition we
+
+613
+00:27:30,769 --> 00:27:33,112
+wouldn't run into any problems because we
+
+614
+00:27:33,112 --> 00:27:35,789
+only have one license right now I think
+
+615
+00:27:35,789 --> 00:27:38,466
+we have how many how many IPM users
+
+616
+00:27:38,466 --> 00:27:40,474
+we're utilizing right now about think
+
+617
+00:27:40,474 --> 00:27:43,151
+about 5 I think about 5 I know
+
+618
+00:27:43,151 --> 00:27:46,113
+we have one license. There's
+
+619
+00:27:46,113 --> 00:27:48,780
+no hard stuff. There's a.
+
+620
+00:27:49,890 --> 00:27:52,359
+OK, yeah on Prem will give you a hard
+
+621
+00:27:52,359 --> 00:27:54,279
+stop. You'll you'll actually not be able
+
+622
+00:27:54,279 --> 00:27:55,650
+to get into the console.
+
+623
+00:27:57,860 --> 00:28:00,644
+This one we allow you to exceed the
+
+624
+00:28:00,644 --> 00:28:03,424
+license limit. So
+
+625
+00:28:03,424 --> 00:28:05,764
+from I understand here, Moe, it's 4000,
+
+626
+00:28:05,764 --> 00:28:08,437
+but I remember we, we, we, we have
+
+627
+00:28:08,437 --> 00:28:10,776
+something where once you could move those
+
+628
+00:28:10,776 --> 00:28:13,450
+Sass they get on prime licenses to Sass.
+
+629
+00:28:15,260 --> 00:28:18,235
+I'm going to get Greg to follow up
+
+630
+00:28:18,235 --> 00:28:21,209
+with you on how many like I could
+
+631
+00:28:21,209 --> 00:28:23,812
+say for Stass you have 4004 thousand,
+
+632
+00:28:23,812 --> 00:28:25,671
+okay. And it's clearly distinguishable
+
+633
+00:28:25,671 --> 00:28:28,645
+now between on Prem and SAS or is
+
+634
+00:28:28,645 --> 00:28:31,620
+it like a bucket of that's the total?
+
+635
+00:28:32,610 --> 00:28:35,499
+Like the 4000 is SAS only or is it
+
+636
+00:28:35,499 --> 00:28:38,388
+ITM you get X4000 SAS and then I forgot
+
+637
+00:28:38,388 --> 00:28:40,955
+the number that you have. All right, so
+
+638
+00:28:40,955 --> 00:28:43,523
+it is, but there's a differential is what
+
+639
+00:28:43,523 --> 00:28:45,770
+I was asking. There is, yeah, okay.
+
+640
+00:28:48,300 --> 00:28:50,486
+Transition with the on Prem licenses to
+
+641
+00:28:50,486 --> 00:28:53,297
+SAS. All right, So I'm going to get Greg
+
+642
+00:28:53,297 --> 00:28:55,795
+to send you an e-mail more to clarify,
+
+643
+00:28:55,795 --> 00:28:58,678
+you know. What
+
+644
+00:28:58,678 --> 00:29:01,658
+a ratio we made with TD on that and the
+
+645
+00:29:01,658 --> 00:29:04,042
+and the on Prem with NAV getting the
+
+646
+00:29:04,042 --> 00:29:06,601
+number. At the on premise, a hard stop,
+
+647
+00:29:06,601 --> 00:29:09,216
+the SAS allows it, like a true up or a
+
+648
+00:29:09,216 --> 00:29:11,308
+reset. And now and Tara said there's the
+
+649
+00:29:11,308 --> 00:29:13,401
+banner page that will tell you where you
+
+650
+00:29:13,401 --> 00:29:16,315
+are and we're looking at it. OK,
+
+651
+00:29:16,315 --> 00:29:19,077
+OK. And also, yeah, I also had a
+
+652
+00:29:19,077 --> 00:29:21,839
+question about one of the rules that I
+
+653
+00:29:21,839 --> 00:29:24,477
+created for. I
+
+654
+00:29:24,477 --> 00:29:27,183
+think this is the one with the
+
+655
+00:29:27,183 --> 00:29:29,907
+UM. Messing
+
+656
+00:29:29,907 --> 00:29:32,550
+around with the folders with the agent
+
+657
+00:29:32,550 --> 00:29:35,192
+installed for some reason doesn't seem to
+
+658
+00:29:35,192 --> 00:29:38,122
+be. I'm creating an alert.
+
+659
+00:29:38,122 --> 00:29:39,850
+I did a couple of tests.
+
+660
+00:29:42,140 --> 00:29:44,156
+Because you said out-of-the-box 1 doesn't
+
+661
+00:29:44,156 --> 00:29:47,153
+work as expected, right?I
+
+662
+00:29:47,153 --> 00:29:48,805
+think when we had a session a couple of
+
+663
+00:29:48,805 --> 00:29:51,530
+weeks ago, a couple of days ago. And
+
+664
+00:29:51,530 --> 00:29:54,170
+this is what I have created
+
+665
+00:29:54,170 --> 00:29:57,067
+so far. I try to
+
+666
+00:29:57,067 --> 00:29:58,370
+put a bunch of.
+
+667
+00:30:00,250 --> 00:30:02,730
+Titles for the window title, but it still
+
+668
+00:30:02,730 --> 00:30:05,501
+doesn't seem to be. Picking up any
+
+669
+00:30:05,501 --> 00:30:08,294
+I can show you my video as well. But
+
+670
+00:30:08,294 --> 00:30:10,776
+what? What is the? Why wouldn't you have
+
+671
+00:30:10,776 --> 00:30:13,258
+it open for everybody? Why is there a
+
+672
+00:30:13,258 --> 00:30:14,810
+condition with just those users?
+
+673
+00:30:16,350 --> 00:30:18,697
+Because these are the users that we have
+
+674
+00:30:18,697 --> 00:30:21,656
+for. For this that we we,
+
+675
+00:30:21,656 --> 00:30:23,456
+for example, we're trying to mimic what
+
+676
+00:30:23,456 --> 00:30:25,256
+we're planning to do in production where
+
+677
+00:30:25,256 --> 00:30:28,001
+we have. A bucket of users who
+
+678
+00:30:28,001 --> 00:30:30,730
+are ITM monitored users. So we assigned
+
+679
+00:30:30,730 --> 00:30:32,785
+people, but this should be, this rule
+
+680
+00:30:32,785 --> 00:30:34,839
+should be open to everyone because this
+
+681
+00:30:34,839 --> 00:30:37,187
+is the same Asian folder that the DLP
+
+682
+00:30:37,187 --> 00:30:39,242
+uses DLP, right? Yeah, you're right. Did
+
+683
+00:30:39,242 --> 00:30:41,590
+you actually want to have this open to
+
+684
+00:30:41,590 --> 00:30:43,938
+the whole user group? I know this is
+
+685
+00:30:43,938 --> 00:30:46,286
+rescue, so not that that would make a
+
+686
+00:30:46,286 --> 00:30:48,340
+difference here. Like isn't it working or
+
+687
+00:30:48,340 --> 00:30:50,688
+not? But I was just curious, right? I
+
+688
+00:30:50,688 --> 00:30:52,742
+mean, this alert should be on for
+
+689
+00:30:52,742 --> 00:30:54,210
+everybody who has the agent.
+
+690
+00:30:55,620 --> 00:30:58,276
+One thing you're missing here is yeah, so
+
+691
+00:30:58,276 --> 00:31:00,980
+edit this. Add add a
+
+692
+00:31:00,980 --> 00:31:01,370
+row.
+
+693
+00:31:03,370 --> 00:31:05,890
+And add application name.
+
+694
+00:31:07,460 --> 00:31:10,127
+OK, yeah, sorry. Select
+
+695
+00:31:10,127 --> 00:31:11,460
+application name.
+
+696
+00:31:16,090 --> 00:31:18,330
+And then just do explorer here.
+
+697
+00:31:20,080 --> 00:31:22,347
+Now I think I had that earlier on but it
+
+698
+00:31:22,347 --> 00:31:24,160
+wasn't working which is why I put the.
+
+699
+00:31:27,590 --> 00:31:30,577
+Choose it from the observed values on the
+
+700
+00:31:30,577 --> 00:31:33,190
+left, so it should be enough extra.
+
+701
+00:31:34,010 --> 00:31:36,442
+And then for the window title, you can
+
+702
+00:31:36,442 --> 00:31:39,178
+just do. OK. So yeah, the reason why it's
+
+703
+00:31:39,178 --> 00:31:41,306
+not firing here is because you're using
+
+704
+00:31:41,306 --> 00:31:44,042
+it in, so you need to change that to
+
+705
+00:31:44,042 --> 00:31:46,293
+a contains. OK,
+
+706
+00:31:46,293 --> 00:31:48,821
+makes sense. OK,
+
+707
+00:31:48,821 --> 00:31:51,350
+that's probably why.
+
+708
+00:31:51,660 --> 00:31:54,180
+The only one that you really need is that
+
+709
+00:31:54,180 --> 00:31:56,140
+middle line, at least the middle one.
+
+710
+00:31:58,340 --> 00:31:59,637
+Yeah, my client utility. So if you want
+
+711
+00:31:59,637 --> 00:32:01,096
+to test it, you can test it, but this
+
+712
+00:32:01,096 --> 00:32:03,930
+should work. OK, let me pitch that.
+
+713
+00:32:16,100 --> 00:32:31,380
+
+
+714
+00:32:34,110 --> 00:32:34,270
+OK.
+
+715
+00:32:52,190 --> 00:32:54,590
+OK, let's see files.
+
+716
+00:32:55,180 --> 00:33:15,260
+
+
+717
+00:33:16,470 --> 00:33:18,204
+It might take a few minutes for it to
+
+718
+00:33:18,204 --> 00:33:20,930
+show up. But
+
+719
+00:33:20,930 --> 00:33:23,694
+OK. That's
+
+720
+00:33:23,694 --> 00:33:26,330
+all I had. I'll just check and see if it
+
+721
+00:33:26,330 --> 00:33:28,703
+shows up and I'll let you guys know in
+
+722
+00:33:28,703 --> 00:33:30,900
+the call. OK. Thank you. Yeah.
+
+723
+00:33:34,460 --> 00:33:37,020
+Good question. Anybody gonna hear me?
+
+724
+00:33:37,500 --> 00:33:38,300
+Yes.
+
+725
+00:33:40,740 --> 00:33:43,460
+Harris, based on your experience?
+
+726
+00:33:44,500 --> 00:33:47,416
+You know how you sit when you set
+
+727
+00:33:47,416 --> 00:33:50,332
+up the realm, you basically tell the RAM
+
+728
+00:33:50,332 --> 00:33:53,249
+how much space it will be utilizing on
+
+729
+00:33:53,249 --> 00:33:56,165
+the end point to store incense matches or
+
+730
+00:33:56,165 --> 00:33:59,081
+all that kind of stuff, right? And I
+
+731
+00:33:59,081 --> 00:34:01,997
+think that we set it up at 1024
+
+732
+00:34:01,997 --> 00:34:03,820
+megabytes, if I'm not mistaken.
+
+733
+00:34:05,940 --> 00:34:08,740
+How long will it take for
+
+734
+00:34:08,740 --> 00:34:11,412
+the default value?To, to,
+
+735
+00:34:11,412 --> 00:34:14,045
+to actually be, I mean, how long
+
+736
+00:34:14,045 --> 00:34:16,678
+would it take to, to actually use
+
+737
+00:34:16,678 --> 00:34:19,311
+all that space when you have the
+
+738
+00:34:19,311 --> 00:34:21,943
+full ITM and DLP running? You know,
+
+739
+00:34:21,943 --> 00:34:24,576
+I'm more concerned about IPM and making
+
+740
+00:34:24,576 --> 00:34:27,209
+sure that we have the right allocation
+
+741
+00:34:27,209 --> 00:34:29,842
+that allows ITM to run for, I
+
+742
+00:34:29,842 --> 00:34:32,474
+don't know, I'm assuming to be running,
+
+743
+00:34:32,474 --> 00:34:35,107
+you know, for a whole week, for
+
+744
+00:34:35,107 --> 00:34:37,364
+example, two weeks disconnected from the
+
+745
+00:34:37,364 --> 00:34:39,830
+network. And people doing stuff and be
+
+746
+00:34:39,830 --> 00:34:42,121
+able to capture everything. What what a
+
+747
+00:34:42,121 --> 00:34:43,945
+person is on vacation might have the
+
+748
+00:34:43,945 --> 00:34:46,029
+computer around and be able to to, you
+
+749
+00:34:46,029 --> 00:34:48,113
+know, allow them to allow the machine to
+
+750
+00:34:48,113 --> 00:34:49,676
+be able to capture everything without
+
+751
+00:34:49,676 --> 00:34:51,499
+losing any data. That's what I'm trying
+
+752
+00:34:51,499 --> 00:34:54,308
+to say. If you know,
+
+753
+00:34:54,308 --> 00:34:57,208
+you know, knowing that we have the X
+
+754
+00:34:57,208 --> 00:35:00,108
+amount of policies and like I heard like
+
+755
+00:35:00,108 --> 00:35:03,009
+a 70 or more than 100, I think
+
+756
+00:35:03,009 --> 00:35:05,909
+policies, I just want to make sure we
+
+757
+00:35:05,909 --> 00:35:08,084
+actually size that component correctly so
+
+758
+00:35:08,084 --> 00:35:10,984
+we allow, you know, full ID and policies
+
+759
+00:35:10,984 --> 00:35:13,885
+to capture the data and DLP for a
+
+760
+00:35:13,885 --> 00:35:16,060
+period of two weeks, 2-3 weeks.
+
+761
+00:35:16,740 --> 00:35:18,620
+Itself lying for whatever reason.
+
+762
+00:35:22,440 --> 00:35:24,573
+You're saying how long will it take to
+
+763
+00:35:24,573 --> 00:35:26,973
+use up all that storage? I mean, I guess
+
+764
+00:35:26,973 --> 00:35:29,107
+it depends on what the user is doing,
+
+765
+00:35:29,107 --> 00:35:31,805
+right? I. The screenshots
+
+766
+00:35:31,805 --> 00:35:34,134
+are going to be the biggest consumer,
+
+767
+00:35:34,134 --> 00:35:36,795
+right? So the screenshots are on for that
+
+768
+00:35:36,795 --> 00:35:39,507
+particular user. This is going to
+
+769
+00:35:39,507 --> 00:35:41,318
+chew through like that allocation very
+
+770
+00:35:41,318 --> 00:35:41,620
+quickly.
+
+771
+00:35:49,920 --> 00:35:52,794
+OK, so how how are the customers are
+
+772
+00:35:52,794 --> 00:35:55,308
+doing this? Like for example, I don't
+
+773
+00:35:55,308 --> 00:35:58,182
+know if you have any, any, any use
+
+774
+00:35:58,182 --> 00:36:01,055
+case where user goes on vacation for for
+
+775
+00:36:01,055 --> 00:36:03,210
+three weeks, the computer stays offline,
+
+776
+00:36:03,210 --> 00:36:06,084
+but the person keeps doing stuff on the
+
+777
+00:36:06,084 --> 00:36:07,880
+computer that should be monitored.
+
+778
+00:36:09,060 --> 00:36:11,247
+And they never connect to the network. So
+
+779
+00:36:11,247 --> 00:36:13,707
+I'm trying to figure out what how we can
+
+780
+00:36:13,707 --> 00:36:15,347
+actually make sure that that that
+
+781
+00:36:15,347 --> 00:36:16,713
+communication is there. All dimensions
+
+782
+00:36:16,713 --> 00:36:18,627
+store all the data. How realistic is
+
+783
+00:36:18,627 --> 00:36:20,267
+that? If someone brought their computer,
+
+784
+00:36:20,267 --> 00:36:21,907
+wouldn't they be connected to the
+
+785
+00:36:21,907 --> 00:36:24,765
+Internet?Like do you think that they'll
+
+786
+00:36:24,765 --> 00:36:27,145
+be offline for three weeks but still use
+
+787
+00:36:27,145 --> 00:36:29,1000
+her computer?I
+
+788
+00:36:29,1000 --> 00:36:32,809
+mean. What chances will
+
+789
+00:36:32,809 --> 00:36:35,233
+be pretty small, but there will be people
+
+790
+00:36:35,233 --> 00:36:37,657
+that does that right? I think my every
+
+791
+00:36:37,657 --> 00:36:40,383
+time I can at least I do it. I
+
+792
+00:36:40,383 --> 00:36:43,110
+disable my Wi-Fi on my on my TV laptop
+
+793
+00:36:43,110 --> 00:36:45,231
+so they won't be connected to the
+
+794
+00:36:45,231 --> 00:36:46,140
+Internet at all.
+
+795
+00:36:48,030 --> 00:36:50,769
+And I have an only computer that I use
+
+796
+00:36:50,769 --> 00:36:53,204
+and that computer is never online. I only
+
+797
+00:36:53,204 --> 00:36:56,075
+turn it on once a month. But
+
+798
+00:36:56,075 --> 00:36:57,300
+I do a lot of stuff there.
+
+799
+00:37:01,360 --> 00:37:04,195
+So there might be a lot of people like
+
+800
+00:37:04,195 --> 00:37:06,400
+me that might be in that situation.
+
+801
+00:37:10,800 --> 00:37:12,174
+If they're not connected to Internet, are
+
+802
+00:37:12,174 --> 00:37:14,860
+they an ITM risk?Maybe that's
+
+803
+00:37:14,860 --> 00:37:17,860
+a no question, right?What can they
+
+804
+00:37:17,860 --> 00:37:20,780
+do?Yeah, if it don't work.
+
+805
+00:37:22,750 --> 00:37:24,670
+Like can they do anything that would be
+
+806
+00:37:24,670 --> 00:37:27,644
+risky that you'd want to monitor?If
+
+807
+00:37:27,644 --> 00:37:30,340
+they're offline, totally offline. Can you
+
+808
+00:37:30,340 --> 00:37:33,258
+guys hear me?Yeah, Oh, sorry, my
+
+809
+00:37:33,258 --> 00:37:36,134
+my Internet crashed out so I just joined
+
+810
+00:37:36,134 --> 00:37:39,009
+on my phone. But yeah. So what I
+
+811
+00:37:39,009 --> 00:37:41,885
+was going to say is that the screenshots
+
+812
+00:37:41,885 --> 00:37:44,761
+are going to chew through most of that
+
+813
+00:37:44,761 --> 00:37:47,277
+for the users that haven't enabled file
+
+814
+00:37:47,277 --> 00:37:49,793
+retention is off right now. So that
+
+815
+00:37:49,793 --> 00:37:52,310
+matters a lot, right. No shadow file
+
+816
+00:37:52,310 --> 00:37:55,185
+copies means that the the events and it's
+
+817
+00:37:55,185 --> 00:37:58,061
+it's just going to be the event metadata
+
+818
+00:37:58,061 --> 00:38:00,874
+and screenshots. I would say the
+
+819
+00:38:00,874 --> 00:38:03,682
+metadata I believe are between. Like
+
+820
+00:38:03,682 --> 00:38:06,453
+one and three KB per event
+
+821
+00:38:06,453 --> 00:38:08,300
+so you know if.
+
+822
+00:38:11,550 --> 00:38:14,220
+Yeah. So if we have let's
+
+823
+00:38:14,220 --> 00:38:16,876
+say like. Maybe 200 to
+
+824
+00:38:16,876 --> 00:38:19,628
+500,000 events, right? A normal user
+
+825
+00:38:19,628 --> 00:38:22,380
+is going to generate maybe a
+
+826
+00:38:22,380 --> 00:38:25,132
+few thousand events a day Max,
+
+827
+00:38:25,132 --> 00:38:27,884
+right? So you're probably looking at
+
+828
+00:38:27,884 --> 00:38:29,260
+a few weeks.
+
+829
+00:38:30,740 --> 00:38:33,068
+You know, to maybe a couple months
+
+830
+00:38:33,068 --> 00:38:35,064
+offline just depending on how much
+
+831
+00:38:35,064 --> 00:38:36,727
+activity they're doing with the
+
+832
+00:38:36,727 --> 00:38:39,414
+screenshots. I believe
+
+833
+00:38:39,414 --> 00:38:42,035
+each screenshot is 250 KB, so
+
+834
+00:38:42,035 --> 00:38:44,940
+let's say around 2:00 to. 4000
+
+835
+00:38:44,940 --> 00:38:47,704
+images. It
+
+836
+00:38:47,704 --> 00:38:49,899
+also depends on how you guys are
+
+837
+00:38:49,899 --> 00:38:52,409
+leveraging the ITM license if it is like
+
+838
+00:38:52,409 --> 00:38:53,350
+the continuous monitoring.
+
+839
+00:38:55,230 --> 00:38:57,398
+You know, then that's obviously going to
+
+840
+00:38:57,398 --> 00:38:59,875
+consume more, but if the capture is just
+
+841
+00:38:59,875 --> 00:39:02,043
+trigger based through that on demand ITM,
+
+842
+00:39:02,043 --> 00:39:03,901
+then obviously you'll you'll save some
+
+843
+00:39:03,901 --> 00:39:04,830
+time as well.
+
+844
+00:39:07,560 --> 00:39:10,006
+But I think, yeah, to answer your
+
+845
+00:39:10,006 --> 00:39:12,803
+question, it it should be, you should be
+
+846
+00:39:12,803 --> 00:39:15,599
+good for a customer going off or sorry,
+
+847
+00:39:15,599 --> 00:39:18,395
+a user going offline for like two or
+
+848
+00:39:18,395 --> 00:39:20,142
+three weeks. Most customers don't
+
+849
+00:39:20,142 --> 00:39:22,239
+actually ever even touch this agent
+
+850
+00:39:22,239 --> 00:39:24,336
+storage setting, right? Which means it
+
+851
+00:39:24,336 --> 00:39:26,783
+gives me an indicator that like our
+
+852
+00:39:26,783 --> 00:39:28,880
+default, you know, our our default
+
+853
+00:39:28,880 --> 00:39:30,627
+configuration addresses those kind of
+
+854
+00:39:30,627 --> 00:39:32,724
+scenarios. But yeah, we can always
+
+855
+00:39:32,724 --> 00:39:35,520
+increase it if if you guys are seeing
+
+856
+00:39:35,520 --> 00:39:35,870
+issues.
+
+857
+00:39:40,910 --> 00:39:43,687
+Thank you. I'm on Sunday to consider,
+
+858
+00:39:43,687 --> 00:39:45,543
+let's probably talk about that offline,
+
+859
+00:39:45,543 --> 00:39:48,017
+maybe try to throw some of those juices
+
+860
+00:39:48,017 --> 00:39:50,801
+that we have today into the cloud and I'm
+
+861
+00:39:50,801 --> 00:39:52,967
+trying to monitor those guys there and
+
+862
+00:39:52,967 --> 00:39:55,441
+see what what the data looks like, how
+
+863
+00:39:55,441 --> 00:39:56,060
+much, yeah.
+
+864
+00:39:58,170 --> 00:40:00,997
+Thank you. I'm sorry
+
+865
+00:40:00,997 --> 00:40:03,988
+follow up questions we have. So when we
+
+866
+00:40:03,988 --> 00:40:06,604
+start losing data, when the aging doesn't
+
+867
+00:40:06,604 --> 00:40:09,220
+stop, it stops processing things. How how
+
+868
+00:40:09,220 --> 00:40:11,463
+this happens? Like does it capture
+
+869
+00:40:11,463 --> 00:40:13,706
+everything and everything that it capture
+
+870
+00:40:13,706 --> 00:40:16,696
+until we reach the stories was kept on
+
+871
+00:40:16,696 --> 00:40:19,686
+the system or does it delete the stuff
+
+872
+00:40:19,686 --> 00:40:22,676
+that is all and just keeps the new
+
+873
+00:40:22,676 --> 00:40:23,050
+things?
+
+874
+00:40:26,070 --> 00:40:28,590
+I believe it will just stop capturing
+
+875
+00:40:28,590 --> 00:40:31,110
+that data after that that allocation is
+
+876
+00:40:31,110 --> 00:40:33,270
+met or that threshold is met.
+
+877
+00:40:33,900 --> 00:40:36,158
+And then when it reports it back from the
+
+878
+00:40:36,158 --> 00:40:37,914
+tenant, it'll report it back from, you
+
+879
+00:40:37,914 --> 00:40:39,922
+know, the time that it occurred, not the
+
+880
+00:40:39,922 --> 00:40:41,929
+time that it's like connecting to to the
+
+881
+00:40:41,929 --> 00:40:44,750
+Internet. Is there any
+
+882
+00:40:44,750 --> 00:40:47,577
+type of logs or anything that tells us
+
+883
+00:40:47,577 --> 00:40:50,050
+that an important run out of storage?
+
+884
+00:40:50,700 --> 00:40:53,028
+Is there anything that has happened to
+
+885
+00:40:53,028 --> 00:40:56,022
+you? We should be able to see that on
+
+886
+00:40:56,022 --> 00:40:59,011
+the endpoint log. Like
+
+887
+00:40:59,011 --> 00:41:01,102
+the local log, I'm not sure exactly where
+
+888
+00:41:01,102 --> 00:41:03,454
+I can find out for you which log because
+
+889
+00:41:03,454 --> 00:41:05,283
+I know there's a couple different log
+
+890
+00:41:05,283 --> 00:41:07,374
+files in there. But yeah, I mean, we
+
+891
+00:41:07,374 --> 00:41:09,726
+should be able to see that, like when it
+
+892
+00:41:09,726 --> 00:41:10,510
+stopped collecting data.
+
+893
+00:41:12,540 --> 00:41:13,100
+OK.
+
+894
+00:41:17,790 --> 00:41:20,403
+So I just kind of to
+
+895
+00:41:20,403 --> 00:41:23,017
+give you like a brief update
+
+896
+00:41:23,017 --> 00:41:25,630
+or like an answer around like
+
+897
+00:41:25,630 --> 00:41:28,243
+the EDM the time or the
+
+898
+00:41:28,243 --> 00:41:31,065
+EDM hashing process. So what
+
+899
+00:41:31,065 --> 00:41:33,789
+I was told and I could put it in
+
+900
+00:41:33,789 --> 00:41:36,210
+an e-mail for you guys as well, but
+
+901
+00:41:36,210 --> 00:41:37,420
+datasets with 10,000 rows.
+
+902
+00:41:39,150 --> 00:41:41,433
+Are typically take around 2 minutes,
+
+903
+00:41:41,433 --> 00:41:44,097
+right? So if we're following that logic,
+
+904
+00:41:44,097 --> 00:41:46,761
+if you have around 700,000 rows right,
+
+905
+00:41:46,761 --> 00:41:49,425
+you know it would be around 2
+
+906
+00:41:49,425 --> 00:41:52,088
+hours, 2 1/2 hours, right to to
+
+907
+00:41:52,088 --> 00:41:53,230
+hash that data.
+
+908
+00:41:56,790 --> 00:41:59,219
+If they provided me any other kind of
+
+909
+00:41:59,219 --> 00:42:01,952
+info then I'll pass it along to you, but
+
+910
+00:42:01,952 --> 00:42:03,470
+this was kind of the.
+
+911
+00:42:05,180 --> 00:42:07,847
+This was kind of what they provided that
+
+912
+00:42:07,847 --> 00:42:10,230
+baseline. Yeah.
+
+913
+00:42:11,460 --> 00:42:14,292
+So I would, I would expect 2 1/2 to like
+
+914
+00:42:14,292 --> 00:42:16,557
+2 hours and 45 minutes probably is what
+
+915
+00:42:16,557 --> 00:42:18,822
+it's going to take to go through those.
+
+916
+00:42:18,822 --> 00:42:21,087
+You know, assuming you're at like 650 to
+
+917
+00:42:21,087 --> 00:42:22,220
+808 hundred 50,000 rows.
+
+918
+00:42:25,860 --> 00:42:27,999
+OK. So let us get that information. We'll
+
+919
+00:42:27,999 --> 00:42:30,673
+send it over and then we can we can have
+
+920
+00:42:30,673 --> 00:42:32,812
+an estimated how long it will take. OK.
+
+921
+00:42:32,812 --> 00:42:34,683
+And then black from there. Thank you.
+
+922
+00:42:34,683 --> 00:42:36,020
+Thank you Harris for that.
+
+923
+00:42:37,980 --> 00:42:40,636
+Right, we're going to have a few more
+
+924
+00:42:40,636 --> 00:42:42,296
+minutes. Anyone needs help from
+
+925
+00:42:42,296 --> 00:42:44,620
+Proofpoint to we went from just working?
+
+926
+00:42:45,420 --> 00:42:46,180
+Yeah, so Harris.
+
+927
+00:42:47,890 --> 00:42:50,642
+That rules now for
+
+928
+00:42:50,642 --> 00:42:53,580
+18. You can
+
+929
+00:42:53,580 --> 00:42:56,380
+see some activity, but there's no alert,
+
+930
+00:42:56,380 --> 00:42:57,980
+no alerts being generated.
+
+931
+00:42:59,580 --> 00:43:00,500
+I don't know why but.
+
+932
+00:43:02,860 --> 00:43:05,510
+Let's see, client utility. Yeah,
+
+933
+00:43:05,510 --> 00:43:07,100
+actually, I see.
+
+934
+00:43:08,300 --> 00:43:11,030
+If you look at the alert, I see that.
+
+935
+00:43:11,030 --> 00:43:13,707
+I see the. Application
+
+936
+00:43:13,707 --> 00:43:16,560
+use. We have the application name as
+
+937
+00:43:16,560 --> 00:43:19,412
+explorer and the window title as client
+
+938
+00:43:19,412 --> 00:43:22,201
+utility. Switch generated in
+
+939
+00:43:22,201 --> 00:43:24,373
+a very. I don't know. I don't see any of
+
+940
+00:43:24,373 --> 00:43:24,590
+that.
+
+941
+00:43:47,510 --> 00:43:48,110
+Let's.
+
+942
+00:43:59,940 --> 00:44:02,895
+I, I see, I, I see the
+
+943
+00:44:02,895 --> 00:44:05,851
+alerts. It looks like you you've done
+
+944
+00:44:05,851 --> 00:44:07,540
+it now as well.
+
+945
+00:44:09,350 --> 00:44:11,450
+At someone on your team, maybe Akarati
+
+946
+00:44:11,450 --> 00:44:11,750
+aura?
+
+947
+00:44:14,190 --> 00:44:16,872
+I see the, I see the alerts that are
+
+948
+00:44:16,872 --> 00:44:19,256
+generated. Let me share my screen and see
+
+949
+00:44:19,256 --> 00:44:20,150
+I'm missing something.
+
+950
+00:44:24,010 --> 00:44:26,650
+OK, so so go back to
+
+951
+00:44:26,650 --> 00:44:28,410
+the rule itself. Uh-huh.
+
+952
+00:44:33,740 --> 00:44:36,387
+OK, now yeah. Click on the rule and
+
+953
+00:44:36,387 --> 00:44:39,034
+Scroll down. You'll see the over the last
+
+954
+00:44:39,034 --> 00:44:41,880
+24 hours you have three matches. Which
+
+955
+00:44:41,880 --> 00:44:44,831
+on that one?Yeah, oh, So yeah,
+
+956
+00:44:44,831 --> 00:44:47,685
+put it to an hour if you want to see
+
+957
+00:44:47,685 --> 00:44:49,967
+an hour, but this should be fine. And
+
+958
+00:44:49,967 --> 00:44:51,965
+there's only three activities. So I see
+
+959
+00:44:51,965 --> 00:44:54,247
+your, I see your most recent one, which
+
+960
+00:44:54,247 --> 00:44:56,530
+was around 10 minutes ago, it looks like.
+
+961
+00:44:56,940 --> 00:44:59,727
+Yeah, Mm-hmm. That's all.
+
+962
+00:44:59,727 --> 00:45:02,310
+Yup. There we go.
+
+963
+00:45:03,020 --> 00:45:05,166
+Yeah, but when you go to the alerts,
+
+964
+00:45:05,166 --> 00:45:06,775
+because it's supposed to generate an
+
+965
+00:45:06,775 --> 00:45:09,356
+alert, right? But. Doesn't show up in
+
+966
+00:45:09,356 --> 00:45:09,660
+here.
+
+967
+00:45:15,500 --> 00:45:18,490
+Yeah, because I see, I see
+
+968
+00:45:18,490 --> 00:45:21,480
+on that like on that page,
+
+969
+00:45:21,480 --> 00:45:24,470
+it shows indicators matches as like
+
+970
+00:45:24,470 --> 00:45:27,460
+opening the proof point folder, Yeah.
+
+971
+00:45:30,160 --> 00:45:32,600
+Maybe it's just not. Maybe it'll just
+
+972
+00:45:32,600 --> 00:45:35,389
+take a few. Well, actually, no. If we're
+
+973
+00:45:35,389 --> 00:45:37,480
+seeing it here, it should actually.
+
+974
+00:45:39,120 --> 00:45:41,640
+Do me a favor, Change. I wonder if we
+
+975
+00:45:41,640 --> 00:45:43,600
+change it to exactly what that window
+
+976
+00:45:43,600 --> 00:45:45,560
+title is, even though we're using a
+
+977
+00:45:45,560 --> 00:45:47,520
+contained statement. I wonder if we just
+
+978
+00:45:47,520 --> 00:45:48,360
+change it. Yeah.
+
+979
+00:45:50,590 --> 00:45:52,568
+Utility Dash File Explorer, Explorer.
+
+980
+00:45:52,568 --> 00:45:54,150
+Yeah, I think that's.
+
+981
+00:45:55,780 --> 00:45:56,740
+That's why I had to.
+
+982
+00:45:59,260 --> 00:46:01,580
+Because that's what it sees when it's.
+
+983
+00:46:05,850 --> 00:46:08,742
+And it picks it up. Clients, this
+
+984
+00:46:08,742 --> 00:46:11,472
+is what it sees, yeah, so remove this
+
+985
+00:46:11,472 --> 00:46:13,860
+one and yeah, this one, this one.
+
+986
+00:46:23,190 --> 00:46:26,059
+OK. Now this should this should
+
+987
+00:46:26,059 --> 00:46:27,609
+like take effect right away. So if you
+
+988
+00:46:27,609 --> 00:46:29,352
+want to test it right now, we still have
+
+989
+00:46:29,352 --> 00:46:31,096
+a few minutes. Yeah, let me just test it
+
+990
+00:46:31,096 --> 00:46:31,290
+out.
+
+991
+00:46:43,930 --> 00:46:45,810
+OK, let's see.
+
+992
+00:46:46,110 --> 00:47:04,270
+
+
+993
+00:47:13,910 --> 00:47:15,190
+That's the rule.
+
+994
+00:47:16,990 --> 00:47:17,510
+Just.
+
+995
+00:47:22,440 --> 00:47:24,560
+I don't think my last activity has come.
+
+996
+00:47:25,300 --> 00:47:26,900
+I don't think it's getting uploaded yet.
+
+997
+00:47:27,740 --> 00:47:29,620
+OK, let's see.
+
+998
+00:47:39,780 --> 00:47:42,253
+So while while we're waiting on this,
+
+999
+00:47:42,253 --> 00:47:44,020
+Fernando. Or did Fernando draw?
+
+1000
+00:47:45,870 --> 00:47:48,334
+I'm here. Oh, you're going to harm me?
+
+1001
+00:47:48,334 --> 00:47:50,989
+Sorry. I. You
+
+1002
+00:47:50,989 --> 00:47:53,939
+had you had a question, or maybe it
+
+1003
+00:47:53,939 --> 00:47:56,520
+was actually Manan who had the question
+
+1004
+00:47:56,520 --> 00:47:59,470
+around how we how we deal with the
+
+1005
+00:47:59,470 --> 00:48:02,420
+empty cells like in the EDM data set.
+
+1006
+00:48:03,140 --> 00:48:05,794
+Correct. Yeah, he did, yeah. So it should
+
+1007
+00:48:05,794 --> 00:48:08,117
+take the empty values with no issues,
+
+1008
+00:48:08,117 --> 00:48:10,772
+right? We just need to make sure there's
+
+1009
+00:48:10,772 --> 00:48:13,094
+no space or like placeholder values put
+
+1010
+00:48:13,094 --> 00:48:15,749
+in. But if it's literally just empty, we
+
+1011
+00:48:15,749 --> 00:48:17,740
+should take it with no problem.
+
+1012
+00:48:20,650 --> 00:48:23,210
+OK, I'll pass. I'll pass that info and
+
+1013
+00:48:23,210 --> 00:48:25,770
+I'll run some testing and I say thank
+
+1014
+00:48:25,770 --> 00:48:28,629
+you. Yeah, and I have this document
+
+1015
+00:48:28,629 --> 00:48:31,283
+I'm going to put in the chat here. Manan,
+
+1016
+00:48:31,283 --> 00:48:33,347
+this should actually I believe this, this
+
+1017
+00:48:33,347 --> 00:48:35,706
+should have some info on that empty cells
+
+1018
+00:48:35,706 --> 00:48:37,180
+as well for the EDM.
+
+1019
+00:48:40,310 --> 00:48:42,443
+Yeah. All right. I just, I'll send it.
+
+1020
+00:48:42,443 --> 00:48:45,390
+Who is that for?Oh
+
+1021
+00:48:45,390 --> 00:48:47,695
+no, I just sent it to you or no, I sent
+
+1022
+00:48:47,695 --> 00:48:49,582
+it again. That link you just put in the
+
+1023
+00:48:49,582 --> 00:48:51,469
+chat because I'll fire it over here to an
+
+1024
+00:48:51,469 --> 00:48:53,355
+e-mail. So they have it. I'll put it in
+
+1025
+00:48:53,355 --> 00:48:55,242
+the, I'll put it in the summary when we
+
+1026
+00:48:55,242 --> 00:48:57,940
+send it out later. That's all. OK. I'll
+
+1027
+00:48:57,940 --> 00:49:00,500
+send it out. But is there anything here
+
+1028
+00:49:00,500 --> 00:49:02,740
+from your perspective that we need to
+
+1029
+00:49:02,740 --> 00:49:04,660
+address? I know there's some licensing
+
+1030
+00:49:04,660 --> 00:49:06,260
+questions, but any, anything pressing,
+
+1031
+00:49:06,260 --> 00:49:09,140
+glaring that we want to follow up on for
+
+1032
+00:49:09,140 --> 00:49:11,380
+next week as we're winding down today?
+
+1033
+00:49:13,570 --> 00:49:16,198
+No, nothing from my end. I mean, I feel
+
+1034
+00:49:16,198 --> 00:49:18,967
+like. Situation normal or OK question
+
+1035
+00:49:18,967 --> 00:49:21,860
+if you don't mind in regards to?
+
+1036
+00:49:23,260 --> 00:49:25,907
+To. I've
+
+1037
+00:49:25,907 --> 00:49:28,845
+been looking for a status page for your
+
+1038
+00:49:28,845 --> 00:49:31,770
+SaaS services. And I haven't
+
+1039
+00:49:31,770 --> 00:49:33,420
+been able to find one.
+
+1040
+00:49:35,100 --> 00:49:37,858
+What is a status speech for yourself?
+
+1041
+00:49:37,858 --> 00:49:40,616
+Yeah. Like is that your time with
+
+1042
+00:49:40,616 --> 00:49:42,980
+Fernando? The service is there online.
+
+1043
+00:49:43,420 --> 00:49:45,609
+Yes, of course. Yeah, for all, usually
+
+1044
+00:49:45,609 --> 00:49:46,860
+for all SAT services.
+
+1045
+00:49:48,720 --> 00:49:51,577
+You you want to have basically
+
+1046
+00:49:51,577 --> 00:49:54,434
+a status of your services for
+
+1047
+00:49:54,434 --> 00:49:57,291
+whether you have the management playing
+
+1048
+00:49:57,291 --> 00:49:58,720
+the data plane.
+
+1049
+00:50:00,740 --> 00:50:03,155
+Whether your data centers are healthy or
+
+1050
+00:50:03,155 --> 00:50:06,085
+not. I haven't
+
+1051
+00:50:06,085 --> 00:50:08,176
+been able to find one, so if you have
+
+1052
+00:50:08,176 --> 00:50:10,268
+one, would you be able to share that with
+
+1053
+00:50:10,268 --> 00:50:10,500
+us?
+
+1054
+00:50:15,420 --> 00:50:18,094
+Yeah, we don't have one. I I hear
+
+1055
+00:50:18,094 --> 00:50:20,100
+you. I I agree with you.
+
+1056
+00:50:21,940 --> 00:50:24,842
+Yeah, because how do how do we,
+
+1057
+00:50:24,842 --> 00:50:26,500
+how did you guys?
+
+1058
+00:50:28,050 --> 00:50:30,715
+Basically. Provide
+
+1059
+00:50:30,715 --> 00:50:33,377
+customers with contractual SLA
+
+1060
+00:50:33,377 --> 00:50:36,039
+measurements for availability, API
+
+1061
+00:50:36,039 --> 00:50:38,701
+availability, e-mail delivery, uptime.
+
+1062
+00:50:38,701 --> 00:50:41,363
+How do you guys
+
+1063
+00:50:41,363 --> 00:50:44,024
+do that? Today it's
+
+1064
+00:50:44,024 --> 00:50:44,690
+by.
+
+1065
+00:50:47,900 --> 00:50:50,474
+Edgar's on your your Tam. I'll let you
+
+1066
+00:50:50,474 --> 00:50:53,048
+chime in, but I'll, I'll go first. But
+
+1067
+00:50:53,048 --> 00:50:55,300
+yeah, I mean, part of that is.
+
+1068
+00:50:55,890 --> 00:50:58,168
+Contractually, it's based on like let's
+
+1069
+00:50:58,168 --> 00:51:00,447
+say support like e-mail availability is
+
+1070
+00:51:00,447 --> 00:51:03,105
+by logging a case and that's reviewing
+
+1071
+00:51:03,105 --> 00:51:05,763
+it. We do have Rcas. We do
+
+1072
+00:51:05,763 --> 00:51:08,422
+publish them when there is a service
+
+1073
+00:51:08,422 --> 00:51:10,700
+interruption. We do have an investigation
+
+1074
+00:51:10,700 --> 00:51:13,358
+to ensure that we are meeting SLA
+
+1075
+00:51:13,358 --> 00:51:16,017
+compliance. There is a there. We do
+
+1076
+00:51:16,017 --> 00:51:18,675
+provide a banner when a service is
+
+1077
+00:51:18,675 --> 00:51:20,573
+interrupted in the Fruitpoint communities
+
+1078
+00:51:20,573 --> 00:51:23,232
+page and we do send out notification
+
+1079
+00:51:23,232 --> 00:51:25,510
+messages when there is a service
+
+1080
+00:51:25,510 --> 00:51:28,148
+interruption. And in
+
+1081
+00:51:28,148 --> 00:51:31,013
+some cases when e-mail is offline, we
+
+1082
+00:51:31,013 --> 00:51:32,650
+can't configure SMS alerts.
+
+1083
+00:51:34,460 --> 00:51:37,238
+Your technical account manager would also
+
+1084
+00:51:37,238 --> 00:51:40,017
+be reaching out to a point
+
+1085
+00:51:40,017 --> 00:51:42,795
+of contact when there is a
+
+1086
+00:51:42,795 --> 00:51:44,648
+significant service interruption that
+
+1087
+00:51:44,648 --> 00:51:46,500
+will be impacting service.
+
+1088
+00:51:48,100 --> 00:51:50,849
+But I agree, we should have a
+
+1089
+00:51:50,849 --> 00:51:53,598
+trust site that is something that many
+
+1090
+00:51:53,598 --> 00:51:55,954
+customers are expecting, but we don't
+
+1091
+00:51:55,954 --> 00:51:58,876
+want to. Yeah, that's, that's
+
+1092
+00:51:58,876 --> 00:52:01,362
+well, is there a feature request already
+
+1093
+00:52:01,362 --> 00:52:04,204
+open? Because I'm, I'm sure I'm not the
+
+1094
+00:52:04,204 --> 00:52:07,045
+first customer to ask this. I look up
+
+1095
+00:52:07,045 --> 00:52:09,887
+when I look up Brock on a nescope
+
+1096
+00:52:09,887 --> 00:52:12,018
+big ID and other providers, everybody
+
+1097
+00:52:12,018 --> 00:52:14,149
+you're providing a SAS service, everybody
+
+1098
+00:52:14,149 --> 00:52:16,850
+has an established page. Yeah, there
+
+1099
+00:52:16,850 --> 00:52:19,850
+probably isn't 1. If there
+
+1100
+00:52:19,850 --> 00:52:22,250
+is a photo, definitely.
+
+1101
+00:52:23,890 --> 00:52:25,919
+Yeah, I think every all my clients expect
+
+1102
+00:52:25,919 --> 00:52:28,709
+to get it. So I I do get beat up on
+
+1103
+00:52:28,709 --> 00:52:30,738
+that a lot. For answer your question, Don
+
+1104
+00:52:30,738 --> 00:52:32,767
+Edgar, anything else you want to add? I'm
+
+1105
+00:52:32,767 --> 00:52:34,796
+sure you get this from your other clients
+
+1106
+00:52:34,796 --> 00:52:35,050
+too.
+
+1107
+00:52:39,140 --> 00:52:41,740
+Like how do you expect
+
+1108
+00:52:41,740 --> 00:52:44,340
+your customers to independently monitor
+
+1109
+00:52:44,340 --> 00:52:46,940
+the service health exactly like
+
+1110
+00:52:46,940 --> 00:52:49,540
+invalidate SLA compliance? That's my
+
+1111
+00:52:49,540 --> 00:52:52,140
+big question for you guys,
+
+1112
+00:52:52,140 --> 00:52:54,740
+because technically I, I've, I've
+
+1113
+00:52:54,740 --> 00:52:57,340
+worked for other other vendors
+
+1114
+00:52:57,340 --> 00:52:59,940
+and I, and I've, I've
+
+1115
+00:52:59,940 --> 00:53:02,540
+worked with other customers like
+
+1116
+00:53:02,540 --> 00:53:05,307
+Scotiabank. RBC, BMO and
+
+1117
+00:53:05,307 --> 00:53:08,053
+we have basically they even
+
+1118
+00:53:08,053 --> 00:53:10,754
+provide an API. With
+
+1119
+00:53:10,754 --> 00:53:13,274
+that status page, which allows
+
+1120
+00:53:13,274 --> 00:53:15,794
+customers to basically create their
+
+1121
+00:53:15,794 --> 00:53:18,314
+own calls so they can
+
+1122
+00:53:18,314 --> 00:53:20,834
+create their own dashboards and
+
+1123
+00:53:20,834 --> 00:53:23,354
+monitor outside the status page,
+
+1124
+00:53:23,354 --> 00:53:25,370
+monitor the service health.
+
+1125
+00:53:28,950 --> 00:53:31,430
+Yeah, I agree. I we don't have it.
+
+1126
+00:53:33,180 --> 00:53:35,963
+I think that I think that I would say if
+
+1127
+00:53:35,963 --> 00:53:38,189
+it it always looks good Fernando and team
+
+1128
+00:53:38,189 --> 00:53:41,019
+if you feel this is. It's
+
+1129
+00:53:41,019 --> 00:53:43,602
+an enhancement to the product a feature
+
+1130
+00:53:43,602 --> 00:53:45,816
+enhancement by all means submit, submit
+
+1131
+00:53:45,816 --> 00:53:48,399
+the request. And I certainly I think
+
+1132
+00:53:48,399 --> 00:53:50,982
+there should be a request already if
+
+1133
+00:53:50,982 --> 00:53:53,934
+there is there might be, but it's just
+
+1134
+00:53:53,934 --> 00:53:56,886
+it just hasn't come from TD. I will
+
+1135
+00:53:56,886 --> 00:53:59,838
+ask my time for it. Yeah, that's fine
+
+1136
+00:53:59,838 --> 00:54:02,052
+to that request already. Yeah, sure,
+
+1137
+00:54:02,052 --> 00:54:05,004
+sure. That makes sense. Team we have to
+
+1138
+00:54:05,004 --> 00:54:07,956
+wrap today we have we have back to
+
+1139
+00:54:07,956 --> 00:54:10,170
+backs with with on behalf of.
+
+1140
+00:54:10,450 --> 00:54:12,992
+Tied up at all afternoon.
+
+1141
+00:54:12,992 --> 00:54:15,534
+So still meet up and
+
+1142
+00:54:15,534 --> 00:54:18,076
+thank you, Tim. Tim, really
+
+1143
+00:54:18,076 --> 00:54:20,618
+quickly where we were talking
+
+1144
+00:54:20,618 --> 00:54:23,160
+about that admin guides for
+
+1145
+00:54:23,160 --> 00:54:25,703
+the products for our steak
+
+1146
+00:54:25,703 --> 00:54:28,245
+intakes. So I think NAV
+
+1147
+00:54:28,245 --> 00:54:30,944
+you responded yesterday. Is there any
+
+1148
+00:54:30,944 --> 00:54:33,218
+traction in getting the PDF versions of
+
+1149
+00:54:33,218 --> 00:54:34,842
+those documents? I'm chasing the
+
+1150
+00:54:34,842 --> 00:54:37,440
+documentation here and I think I see you
+
+1151
+00:54:37,440 --> 00:54:38,090
+on that.
+
+1152
+00:54:40,180 --> 00:54:42,532
+I'm not sure what you're referring to.
+
+1153
+00:54:42,532 --> 00:54:45,220
+Any guide you might need should be going
+
+1154
+00:54:45,220 --> 00:54:47,572
+directly to either. These are all the
+
+1155
+00:54:47,572 --> 00:54:48,580
+guys are online.
+
+1156
+00:54:52,580 --> 00:54:55,224
+Yeah, it's awesome. So making a special
+
+1157
+00:54:55,224 --> 00:54:57,491
+request. Yeah, I'm making a special
+
+1158
+00:54:57,491 --> 00:55:00,414
+request to the documentation team. To
+
+1159
+00:55:00,414 --> 00:55:03,325
+have an offline version of it if they
+
+1160
+00:55:03,325 --> 00:55:05,873
+could export to PDF. I'm chasing that
+
+1161
+00:55:05,873 --> 00:55:08,785
+person I have and I'd like to understand
+
+1162
+00:55:08,785 --> 00:55:11,696
+the use case for an offline version only
+
+1163
+00:55:11,696 --> 00:55:13,880
+because those versions change. So what
+
+1164
+00:55:13,880 --> 00:55:16,791
+you get on, you know, June 1st is
+
+1165
+00:55:16,791 --> 00:55:18,975
+could be modified or different come
+
+1166
+00:55:18,975 --> 00:55:21,887
+December, January for and so on. So I'd
+
+1167
+00:55:21,887 --> 00:55:24,434
+be a little concerned about having PDFs
+
+1168
+00:55:24,434 --> 00:55:27,267
+of something that's evolves. For admin,
+
+1169
+00:55:27,267 --> 00:55:30,224
+they would just be using it for the use
+
+1170
+00:55:30,224 --> 00:55:32,524
+case right now. So whatever comes out
+
+1171
+00:55:32,524 --> 00:55:35,152
+right now, just FYI, that's why we use
+
+1172
+00:55:35,152 --> 00:55:37,452
+links. But in any event, team, I'm
+
+1173
+00:55:37,452 --> 00:55:39,751
+really, I'm hard pressed to provide a
+
+1174
+00:55:39,751 --> 00:55:41,722
+presentation on behalf of this effort
+
+1175
+00:55:41,722 --> 00:55:43,694
+right this minute. So appreciate your
+
+1176
+00:55:43,694 --> 00:55:46,322
+time. I'll have I'll have the I will
+
+1177
+00:55:46,322 --> 00:55:48,293
+share this recording and summary ASAP
+
+1178
+00:55:48,293 --> 00:55:51,250
+today and I find it will be very helpful.
+
+1179
+00:55:55,360 --> 00:55:58,150
+Thank you. Thank
+
+1180
+00:55:58,150 --> 00:55:58,510
+you.

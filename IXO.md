@@ -38,7 +38,7 @@ flowchart LR
 
     subgraph Removed["<b>Remove<b>"]
         direction TB
-        H["6. Clean up legacy ARE access<br><br>Remove obsolete ARE groups, IDs, mappings, VDI access and permissions"]
+        H["6. Revoke legacy ARE access<br><br>Remove obsolete ARE groups, IDs, mappings, VDI access and permissions"]
     end
 
     %% Cross-subgraph connections (Now with time durations)

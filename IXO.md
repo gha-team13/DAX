@@ -16,7 +16,7 @@ flowchart LR
         D{"Replacement access<br>ready and validated?"}
         R1["Complete missing replacement access"]
         
-        %% Internal connections (Keeps the loop inside the subgraph)
+        %% Internal connections
         C --> D
         D -->|No| R1
         R1 --> C
@@ -29,7 +29,7 @@ flowchart LR
         G{"Receiving-team access<br>confirmed?"}
         R2["Resolve receiving-team access gaps"]
         
-        %% Internal connections (Keeps the loop inside the subgraph)
+        %% Internal connections
         E --> F
         F --> G
         G -->|No| R2
@@ -41,10 +41,11 @@ flowchart LR
         H["6. Clean up legacy ARE access<br><br>Remove obsolete ARE groups, IDs, mappings, VDI access and permissions"]
     end
 
-    %% Cross-subgraph connections (These will now bridge cleanly between the boxes)
-    B --> C
-    D -->|Yes| E
-    G -->|Yes| H
+    %% Cross-subgraph connections (Now with time durations)
+    %% You can edit the text inside the quotes to change the times
+    B -->|"Duration: 48 Hours"| C
+    D -->|"Yes<br>(Duration: 24 Hours)"| E
+    G -->|"Yes<br>(Duration: 7 Days)"| H
 
     classDef validate stroke:#818cf8,fill:#eef2ff
     classDef recreated stroke:#2dd4bf,fill:#f0fdfa
@@ -53,7 +54,6 @@ flowchart LR
     classDef decision stroke:#a3e635,fill:#f7fee7
     classDef remediation stroke:#fb7185,fill:#fff1f2
 
-    %% Applied classes (Adjusted so colors correctly match their parent subgraphs)
     class A,B validate
     class C recreated
     class E,F transferred

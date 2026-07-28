@@ -1,7 +1,7 @@
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'step' } } }%%
 flowchart LR
-    subgraph Validate["Validate"]
+    subgraph Validate["<b>Validate<b>"]
         direction TB
         A["1. Confirm impacted areas<br><br>Identify impacted Segments, applications, platforms, ICTO and Senior Manager contacts"]
         B["2. Validate target-state access<br><br>Confirm required Release, Distributed, Mainframe, VDI, AD, CyberArk/NPID, pipeline, Linux/Unix and ServiceNow access"]
@@ -10,7 +10,7 @@ flowchart LR
         A --> B
     end
 
-    subgraph Recreated["Recreate"]
+    subgraph Recreated["<b>Recreate<b>"]
         direction TB
         C["3. Prepare replacement access<br><br>Create or transfer AD groups, CyberArk, VDI, pipeline, Linux/Unix and workflow access"]
         D{"Replacement access<br>ready and validated?"}
@@ -22,7 +22,7 @@ flowchart LR
         R1 --> C
     end
 
-    subgraph Transferred["Transfer"]
+    subgraph Transferred["<b>Transfer<b>"]
         direction TB
         E["4. Execute Workday move<br><br>CyberArk/NPID access may be removed by design"]
         F["5. Activate receiving-team access<br><br>Receiving manager and target teams activate and validate access"]
@@ -36,7 +36,7 @@ flowchart LR
         R2 --> F
     end
 
-    subgraph Removed["Remove"]
+    subgraph Removed["<b>Remove<b>"]
         direction TB
         H["6. Clean up legacy ARE access<br><br>Remove obsolete ARE groups, IDs, mappings, VDI access and permissions"]
     end

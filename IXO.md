@@ -10,7 +10,7 @@ flowchart LR
         A --> B
     end
 
-    subgraph Recreated["Recreated"]
+    subgraph Recreated["Recreate"]
         direction TB
         C["3. Prepare replacement access<br><br>Create or transfer AD groups, CyberArk, VDI, pipeline, Linux/Unix and workflow access"]
         D{"Replacement access<br>ready and validated?"}
@@ -22,7 +22,7 @@ flowchart LR
         R1 --> C
     end
 
-    subgraph Transferred["Transferred"]
+    subgraph Transferred["Transfer"]
         direction TB
         E["4. Execute Workday move<br><br>CyberArk/NPID access may be removed by design"]
         F["5. Activate receiving-team access<br><br>Receiving manager and target teams activate and validate access"]
@@ -36,7 +36,7 @@ flowchart LR
         R2 --> F
     end
 
-    subgraph Removed["Removed"]
+    subgraph Removed["Remove"]
         direction TB
         H["6. Clean up legacy ARE access<br><br>Remove obsolete ARE groups, IDs, mappings, VDI access and permissions"]
     end

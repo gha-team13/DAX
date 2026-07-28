@@ -1,3 +1,4 @@
+```mermaid
 %%{ init: { 'flowchart': { 'curve': 'step' }, 'themeVariables': { 'edgeLabelBackground': 'transparent' } } }%%
 flowchart LR
     subgraph Validate["Validate"]
